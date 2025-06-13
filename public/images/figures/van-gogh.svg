@@ -1,0 +1,10 @@
+<svg width="300" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="400" fill="#4a90e2" stroke="#dee2e6" stroke-width="2"/>
+  <text x="150" y="50" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">Van Gogh Labubu</text>
+  <ellipse cx="150" cy="180" rx="60" ry="80" fill="#ffb74d" opacity="0.9"/>
+  <ellipse cx="130" cy="160" rx="8" ry="15" fill="#ff5722"/>
+  <ellipse cx="170" cy="160" rx="8" ry="15" fill="#ff5722"/>
+  <circle cx="140" cy="175" r="3" fill="#000"/>
+  <circle cx="160" cy="175" r="3" fill="#000"/>
+  <text x="150" y="350" text-anchor="middle" fill="white" font-size="14">Post-Impressionist Style</text>
+</svg> 
