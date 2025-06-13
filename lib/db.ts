@@ -8,7 +8,7 @@ const mockSeries: Series[] = [
     slug: "art-series", 
     releaseDate: "2022-08-19",
     description: "A series featuring The Monsters family members integrated into world famous paintings.",
-    coverImageUrl: "/images/series/art-series-cover.jpg"
+    coverImageUrl: "/images/series/art-series-cover.svg"
   },
   {
     id: 2,
@@ -16,7 +16,7 @@ const mockSeries: Series[] = [
     slug: "macaron-series",
     releaseDate: "2023-04-07", 
     description: "A sweet and colorful series inspired by delicious macarons.",
-    coverImageUrl: "/images/series/macaron-series-cover.jpg"
+    coverImageUrl: "/images/series/macaron-series-cover.svg"
   },
   {
     id: 3,
@@ -24,17 +24,17 @@ const mockSeries: Series[] = [
     slug: "spongebob-series",
     releaseDate: "2023-06-21",
     description: "A crossover collaboration series with the SpongeBob SquarePants world.",
-    coverImageUrl: "/images/series/spongebob-series-cover.jpg"
+    coverImageUrl: "/images/series/spongebob-series-cover.svg"
   }
 ];
 
 const mockFigures: Figure[] = [
   // Artist Series figures
-  { id: 1, name: "Discus Thrower", description: "Labubu as the classical Greek sculpture", imageUrl: "/images/figures/discus-thrower.jpg", isSecret: false, seriesId: 1 },
-  { id: 2, name: "Van Gogh", description: "Labubu in Van Gogh's self-portrait style", imageUrl: "/images/figures/van-gogh.jpg", isSecret: false, seriesId: 1 },
+  { id: 1, name: "Discus Thrower", description: "Labubu as the classical Greek sculpture", imageUrl: "/images/figures/discus-thrower.svg", isSecret: false, seriesId: 1 },
+  { id: 2, name: "Van Gogh", description: "Labubu in Van Gogh's self-portrait style", imageUrl: "/images/figures/van-gogh.svg", isSecret: false, seriesId: 1 },
   { id: 3, name: "The Scream", description: "Labubu recreating Munch's famous painting", imageUrl: "/images/figures/the-scream.jpg", isSecret: false, seriesId: 1 },
   { id: 4, name: "Mona Lisa", description: "Labubu with the enigmatic smile", imageUrl: "/images/figures/mona-lisa.jpg", isSecret: false, seriesId: 1 },
-  { id: 5, name: "Birth of Venus", description: "Secret variant of the Renaissance masterpiece", imageUrl: "/images/figures/birth-of-venus.jpg", isSecret: true, seriesId: 1 },
+  { id: 5, name: "Birth of Venus", description: "Secret variant of the Renaissance masterpiece", imageUrl: "/images/figures/birth-of-venus.svg", isSecret: true, seriesId: 1 },
   
   // Macaron Series figures  
   { id: 6, name: "Soy Milk Macaron", description: "Creamy soy milk flavored design", imageUrl: "/images/figures/soy-milk-macaron.jpg", isSecret: false, seriesId: 2 },
@@ -63,7 +63,7 @@ const mockNews: NewsPost[] = [
 
 <p>The combination of artistic merit, collectible appeal, and Pop Mart's global distribution has transformed Labubu from a simple character design into a cultural phenomenon that spans continents and generations.</p>`,
     publishedAt: "2024-12-01T10:00:00Z",
-    imageUrl: "/images/news/labubu-popular.jpg"
+    imageUrl: "/images/news/labubu-popular.svg"
   },
   {
     id: 2,

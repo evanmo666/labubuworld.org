@@ -14,7 +14,7 @@ html {
 
 /* 加载动画 */
 .loading-spinner {
-  @apply animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600;
+  @apply animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600;
 }
 
 /* 悬停效果 */

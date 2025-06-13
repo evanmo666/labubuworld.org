@@ -66,7 +66,7 @@ export default function RootLayout({
                   Series
                 </a>
                 <a href="/guides/how-to-spot-fake" className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">
-                  Authenticity Guide
+                  Real VS Fake Labubu
                 </a>
                 <a href="/news" className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">
                   News
@@ -109,7 +109,7 @@ export default function RootLayout({
                 <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
                 <ul className="space-y-2 text-sm">
                   <li><a href="/series" className="text-gray-400 hover:text-white transition-colors">All Series</a></li>
-                  <li><a href="/guides/how-to-spot-fake" className="text-gray-400 hover:text-white transition-colors">Authenticity Guide</a></li>
+                  <li><a href="/guides/how-to-spot-fake" className="text-gray-400 hover:text-white transition-colors">Real VS Fake Labubu</a></li>
                   <li><a href="/news" className="text-gray-400 hover:text-white transition-colors">Latest News</a></li>
                   <li><a href="/about" className="text-gray-400 hover:text-white transition-colors">About</a></li>
                 </ul>
