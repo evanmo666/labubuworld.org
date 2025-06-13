@@ -1,9 +1,20 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Nunito, Poppins } from 'next/font/google'
 import './globals.css'
 import { AuthProvider } from '@/components/SessionProvider'
 
 const inter = Inter({ subsets: ['latin'] })
+const nunito = Nunito({ 
+  subsets: ['latin'],
+  variable: '--font-nunito',
+  display: 'swap',
+})
+const poppins = Poppins({ 
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-poppins',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Labubu World | Your Ultimate Collection Guide',
