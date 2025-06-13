@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Nunito, Poppins } from 'next/font/google'
 import './globals.css'
-import { AuthProvider } from '@/components/SessionProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 const nunito = Nunito({ 
@@ -57,7 +56,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AuthProvider>
         {/* 导航栏 */}
         <nav className="bg-white shadow-lg border-b border-gray-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -144,7 +142,6 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
-        </AuthProvider>
       </body>
     </html>
   )
