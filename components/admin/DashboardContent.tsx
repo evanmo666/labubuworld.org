@@ -1,6 +1,5 @@
 "use client"
 
-import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
@@ -13,8 +12,9 @@ interface DashboardStats {
 }
 
 export function DashboardContent() {
-  const { data: session, status } = useSession()
   const router = useRouter()
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [stats, setStats] = useState<DashboardStats>({
     totalSeries: 0,
     totalFigures: 0,
@@ -24,12 +24,19 @@ export function DashboardContent() {
 
   // 检查认证状态
   useEffect(() => {
-    if (status === 'loading') return // 仍在加载中
-    if (!session) {
-      router.push('/admin/login')
-      return
+    const checkAuth = () => {
+      const isLoggedIn = localStorage.getItem('isAdminLoggedIn')
+      if (isLoggedIn === 'true') {
+        setIsAuthenticated(true)
+      } else {
+        router.push('/admin/login')
+        return
+      }
+      setIsLoading(false)
     }
-  }, [session, status, router])
+
+    checkAuth()
+  }, [router])
 
   // 获取统计数据
   useEffect(() => {
@@ -48,16 +55,17 @@ export function DashboardContent() {
       }
     }
 
-    if (session) {
+    if (isAuthenticated) {
       fetchStats()
     }
-  }, [session])
+  }, [isAuthenticated])
 
   const handleSignOut = () => {
-    signOut({ callbackUrl: '/admin/login' })
+    localStorage.removeItem('isAdminLoggedIn')
+    router.push('/admin/login')
   }
 
-  if (status === 'loading') {
+  if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
@@ -68,7 +76,7 @@ export function DashboardContent() {
     )
   }
 
-  if (!session) {
+  if (!isAuthenticated) {
     return null // 将重定向到登录页面
   }
 
@@ -85,7 +93,7 @@ export function DashboardContent() {
             </div>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-600">
-                Welcome, {session.user?.email}
+                Welcome, admin@labubuworld.org
               </span>
               <button
                 onClick={handleSignOut}
@@ -233,7 +241,7 @@ export function DashboardContent() {
               </div>
               <div className="flex items-center text-sm">
                 <div className="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
-                <span className="text-gray-600">Authentication system configured</span>
+                <span className="text-gray-600">Authentication system simplified</span>
                 <span className="ml-auto text-gray-400">Just now</span>
               </div>
             </div>

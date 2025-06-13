@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from 'react'
-import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
 export default function AdminLogin() {
@@ -16,23 +15,16 @@ export default function AdminLogin() {
     setIsLoading(true)
     setError('')
 
-    try {
-      const result = await signIn('credentials', {
-        email,
-        password,
-        redirect: false
-      })
-
-      if (result?.error) {
-        setError('Invalid credentials')
-      } else {
-        router.push('/admin/dashboard')
-      }
-    } catch (error) {
-      setError('Login failed')
-    } finally {
-      setIsLoading(false)
+    // 简单的客户端验证（临时解决方案）
+    if (email === 'admin@labubuworld.org' && password === 'labubu2024admin') {
+      // 设置简单的认证状态
+      localStorage.setItem('isAdminLoggedIn', 'true')
+      router.push('/admin/dashboard')
+    } else {
+      setError('Invalid credentials')
     }
+    
+    setIsLoading(false)
   }
 
   return (
