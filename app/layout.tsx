@@ -86,6 +86,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${nunito.variable} ${poppins.variable} ${comfortaa.variable} ${quicksand.variable}`}>
+      <head>
+        {/* Google Analytics */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-2LVBR7CXCW"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-2LVBR7CXCW');
+            `,
+          }}
+        />
+      </head>
       <body className={`${comfortaa.className} font-round`}>
         {/* 导航栏 */}
         <nav className="bg-gradient-to-r from-pink-50 to-purple-50 shadow-cute border-b border-pink-200">
