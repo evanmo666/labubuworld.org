@@ -46,8 +46,12 @@ module.exports = {
         }
       },
       fontFamily: {
-        'cute': ['Comic Neue', 'Nunito', 'Poppins', 'system-ui', 'sans-serif'],
-        'round': ['Nunito', 'Poppins', 'system-ui', 'sans-serif'],
+        'cute': ['var(--font-comfortaa)', 'var(--font-quicksand)', 'var(--font-nunito)', 'Comic Neue', 'system-ui', 'sans-serif'],
+        'round': ['var(--font-comfortaa)', 'var(--font-quicksand)', 'var(--font-nunito)', 'system-ui', 'sans-serif'],
+        'comfortaa': ['var(--font-comfortaa)', 'system-ui', 'sans-serif'],
+        'quicksand': ['var(--font-quicksand)', 'system-ui', 'sans-serif'],
+        'nunito': ['var(--font-nunito)', 'system-ui', 'sans-serif'],
+        'poppins': ['var(--font-poppins)', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
         'xl': '1rem',

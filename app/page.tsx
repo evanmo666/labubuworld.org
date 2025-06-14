@@ -26,10 +26,10 @@ export default async function HomePage() {
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 font-round">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 font-comfortaa">
               ✨ Labubu World ✨
             </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto font-round">
+            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto font-quicksand">
               Your Ultimate Collection Guide 💕
             </p>
             <p className="text-lg mb-12 max-w-2xl mx-auto opacity-90">
@@ -58,7 +58,7 @@ export default async function HomePage() {
       <section className="py-16 gradient-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold title-cute mb-4 font-round">
+            <h2 className="text-3xl md:text-4xl font-bold title-cute mb-4 font-comfortaa">
               ✨ Featured Series ✨
             </h2>
             <p className="text-lg text-cute-600 max-w-2xl mx-auto">
@@ -83,7 +83,7 @@ export default async function HomePage() {
                     />
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-semibold text-cute-700 mb-2 group-hover:text-cute-500 transition-colors font-round">
+                    <h3 className="text-xl font-semibold text-cute-700 mb-2 group-hover:text-cute-500 transition-colors font-comfortaa">
                       {series.name}
                     </h3>
                     {series.releaseDate && (
@@ -118,7 +118,7 @@ export default async function HomePage() {
       <section className="py-16 bg-white/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold title-cute mb-4 font-round">
+            <h2 className="text-3xl md:text-4xl font-bold title-cute mb-4 font-comfortaa">
               📰 Latest News 📰
             </h2>
             <p className="text-lg text-cute-600 max-w-2xl mx-auto">
@@ -146,7 +146,7 @@ export default async function HomePage() {
                     <time className="text-sm text-cute-500 mb-2 block">
                       📅 {new Date(news.publishedAt).toLocaleDateString()}
                     </time>
-                    <h3 className="text-xl font-semibold text-cute-700 mb-3 group-hover:text-cute-500 transition-colors font-round">
+                    <h3 className="text-xl font-semibold text-cute-700 mb-3 group-hover:text-cute-500 transition-colors font-comfortaa">
                       {news.title}
                     </h3>
                     <p className="text-cute-600 text-sm line-clamp-3">

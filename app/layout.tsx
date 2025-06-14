@@ -1,18 +1,33 @@
 import type { Metadata } from 'next'
-import { Inter, Nunito, Poppins } from 'next/font/google'
+import { Nunito, Poppins, Comfortaa, Quicksand } from 'next/font/google'
 import Image from 'next/image'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
 const nunito = Nunito({ 
   subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'],
   variable: '--font-nunito',
   display: 'swap',
 })
+
 const poppins = Poppins({ 
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
   variable: '--font-poppins',
+  display: 'swap',
+})
+
+const comfortaa = Comfortaa({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-comfortaa',
+  display: 'swap',
+})
+
+const quicksand = Quicksand({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-quicksand',
   display: 'swap',
 })
 
@@ -69,8 +84,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className={`${nunito.variable} ${poppins.variable} ${comfortaa.variable} ${quicksand.variable}`}>
+      <body className={`${comfortaa.className} font-round`}>
         {/* 导航栏 */}
         <nav className="bg-gradient-to-r from-pink-50 to-purple-50 shadow-cute border-b border-pink-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -84,25 +99,25 @@ export default function RootLayout({
                     height={40}
                     className="rounded-cute hover:scale-110 transition-transform duration-300"
                   />
-                  <span className="text-2xl font-bold text-cute-600 font-round">Labubu World ✨</span>
+                  <span className="text-2xl font-bold text-cute-600 font-comfortaa">Labubu World ✨</span>
                 </a>
               </div>
               
               {/* 主导航菜单 */}
               <div className="hidden md:flex items-center space-x-6">
-                <a href="/" className="text-cute-700 hover:text-cute-500 px-4 py-2 text-sm font-medium transition-all duration-300 rounded-cute hover:bg-pink-100">
+                <a href="/" className="text-cute-700 hover:text-cute-500 px-4 py-2 text-sm font-medium transition-all duration-300 rounded-cute hover:bg-pink-100 font-quicksand">
                   🏠 Home
                 </a>
-                <a href="/series" className="text-cute-700 hover:text-cute-500 px-4 py-2 text-sm font-medium transition-all duration-300 rounded-cute hover:bg-pink-100">
+                <a href="/series" className="text-cute-700 hover:text-cute-500 px-4 py-2 text-sm font-medium transition-all duration-300 rounded-cute hover:bg-pink-100 font-quicksand">
                   📚 Series
                 </a>
-                <a href="/guides/how-to-spot-fake" className="text-cute-700 hover:text-cute-500 px-4 py-2 text-sm font-medium transition-all duration-300 rounded-cute hover:bg-pink-100">
+                <a href="/guides/how-to-spot-fake" className="text-cute-700 hover:text-cute-500 px-4 py-2 text-sm font-medium transition-all duration-300 rounded-cute hover:bg-pink-100 font-quicksand">
                   🔍 Real VS Fake
                 </a>
-                <a href="/news" className="text-cute-700 hover:text-cute-500 px-4 py-2 text-sm font-medium transition-all duration-300 rounded-cute hover:bg-pink-100">
+                <a href="/news" className="text-cute-700 hover:text-cute-500 px-4 py-2 text-sm font-medium transition-all duration-300 rounded-cute hover:bg-pink-100 font-quicksand">
                   📰 News
                 </a>
-                <a href="/about" className="text-cute-700 hover:text-cute-500 px-4 py-2 text-sm font-medium transition-all duration-300 rounded-cute hover:bg-pink-100">
+                <a href="/about" className="text-cute-700 hover:text-cute-500 px-4 py-2 text-sm font-medium transition-all duration-300 rounded-cute hover:bg-pink-100 font-quicksand">
                   💖 About
                 </a>
               </div>
@@ -137,7 +152,7 @@ export default function RootLayout({
                     height={32}
                     className="rounded-cute hover:scale-110 transition-transform duration-300"
                   />
-                  <h3 className="text-lg font-semibold font-round">Labubu World ✨</h3>
+                  <h3 className="text-lg font-semibold font-comfortaa">Labubu World ✨</h3>
                 </div>
                 <p className="text-cute-600 text-sm">
                   Your ultimate guide to the magical world of Labubu collectible figures! 💕
@@ -146,7 +161,7 @@ export default function RootLayout({
               </div>
               
               <div>
-                <h3 className="text-lg font-semibold mb-4 font-round">🔗 Quick Links</h3>
+                <h3 className="text-lg font-semibold mb-4 font-comfortaa">🔗 Quick Links</h3>
                 <ul className="space-y-3 text-sm">
                   <li><a href="/series" className="text-cute-600 hover:text-cute-500 transition-colors hover:underline">📚 All Series</a></li>
                   <li><a href="/guides/how-to-spot-fake" className="text-cute-600 hover:text-cute-500 transition-colors hover:underline">🔍 Real VS Fake Guide</a></li>
@@ -156,7 +171,7 @@ export default function RootLayout({
               </div>
               
               <div>
-                <h3 className="text-lg font-semibold mb-4 font-round">📋 Legal</h3>
+                <h3 className="text-lg font-semibold mb-4 font-comfortaa">📋 Legal</h3>
                 <ul className="space-y-3 text-sm">
                   <li><span className="text-cute-600">🔒 Privacy Policy</span></li>
                   <li><span className="text-cute-600">📜 Terms of Service</span></li>

@@ -10,6 +10,21 @@ html {
 body {
   background: linear-gradient(135deg, #fdf2f8 0%, #fae8ff 50%, #f3e8ff 100%);
   min-height: 100vh;
+  font-family: var(--font-comfortaa), var(--font-quicksand), var(--font-nunito), 'Comic Neue', system-ui, sans-serif;
+}
+
+/* 确保所有文字都使用圆体字体 */
+* {
+  font-family: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-comfortaa), var(--font-quicksand), system-ui, sans-serif;
+  font-weight: 600;
+}
+
+p, span, div, a, button, input, textarea {
+  font-family: var(--font-quicksand), var(--font-comfortaa), system-ui, sans-serif;
 }
 
 /* 隐藏款徽章样式 - 更可爱的金色 */
@@ -45,7 +60,7 @@ body {
 
 /* 可爱的按钮样式 */
 .btn-cute {
-  @apply bg-gradient-to-r from-pink-400 to-purple-500 text-white font-medium px-6 py-3 rounded-cute shadow-cute hover:shadow-warm transition-all duration-300 hover:scale-105;
+  @apply bg-gradient-to-r from-pink-400 to-purple-500 text-white font-medium px-6 py-3 rounded-cute shadow-cute hover:shadow-warm transition-all duration-300 hover:scale-105 font-comfortaa;
 }
 
 .btn-cute:hover {
@@ -54,7 +69,7 @@ body {
 
 /* 可爱的输入框样式 */
 .input-cute {
-  @apply border-2 border-pink-200 rounded-cute px-4 py-2 focus:border-pink-400 focus:ring-2 focus:ring-pink-200 transition-all duration-300;
+  @apply border-2 border-pink-200 rounded-cute px-4 py-2 focus:border-pink-400 focus:ring-2 focus:ring-pink-200 transition-all duration-300 font-quicksand;
 }
 
 /* 可爱的滚动条 */
@@ -90,7 +105,7 @@ body {
 
 /* 可爱的标题样式 */
 .title-cute {
-  @apply font-round text-cute-700 bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent;
+  @apply font-comfortaa text-cute-700 bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent font-bold;
 }
 
 /* 可爱的卡片样式 */
