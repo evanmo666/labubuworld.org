@@ -317,10 +317,7 @@ NEXTAUTH_URL=
 ## 🔑 管理员登录信息
 
 **管理员登录地址**: `/admin/login`  
-**演示账户**:
-- 邮箱: `admin@labubuworld.org`
-- 密码: `labubu2024admin`
 
-> 注意：这是演示账户，生产环境请修改为安全的凭据
+> 注意：管理员账户信息请联系开发者获取，生产环境请使用安全的凭据
 
 > 注意：这是一个非官方的粉丝网站。Labubu 是 POP MART 和 Kasing Lung 的商标。 

@@ -49,7 +49,7 @@ export default function AdminLogin() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="admin@labubuworld.org"
+              placeholder="Enter your email"
             />
           </div>
 
@@ -83,11 +83,7 @@ export default function AdminLogin() {
           </button>
         </form>
 
-        <div className="mt-6 text-center text-sm text-gray-500">
-          <p>Demo Credentials:</p>
-          <p>Email: admin@labubuworld.org</p>
-          <p>Password: labubu2024admin</p>
-        </div>
+
       </div>
     </div>
   )
