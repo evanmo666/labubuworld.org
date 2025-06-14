@@ -1,10 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getAllSeries } from '@/lib/db'
+import { getAllSeriesFromMemory, createSeriesInMemory, convertImgBBUrl } from '@/lib/memory-store'
 
 // 获取所有系列
 export async function GET() {
   try {
-    const series = await getAllSeries()
+    // 优先使用数据库，如果不可用则使用内存存储
+    let series
+    try {
+      series = await getAllSeries()
+    } catch (error) {
+      console.log('数据库不可用，使用内存存储')
+      series = getAllSeriesFromMemory()
+    }
     return NextResponse.json(series)
   } catch (error) {
     console.error('获取系列列表失败:', error)
@@ -19,7 +27,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { name, slug, releaseDate, description, coverImageUrl } = body
+    let { name, slug, releaseDate, description, coverImageUrl } = body
 
     // 验证必填字段
     if (!name || !slug) {
@@ -29,16 +37,22 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // 这里应该调用数据库插入操作
-    // 暂时返回成功响应
-    const newSeries = {
-      id: Date.now(), // 临时ID生成
+    // 转换ImgBB链接格式
+    if (coverImageUrl) {
+      coverImageUrl = convertImgBBUrl(coverImageUrl)
+    }
+
+    // 创建新系列数据
+    const seriesData = {
       name,
       slug,
       releaseDate: releaseDate || null,
       description: description || null,
       coverImageUrl: coverImageUrl || null
     }
+
+    // 使用内存存储创建系列
+    const newSeries = createSeriesInMemory(seriesData)
 
     return NextResponse.json(newSeries, { status: 201 })
   } catch (error) {

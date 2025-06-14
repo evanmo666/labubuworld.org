@@ -137,10 +137,11 @@ function isDatabaseAvailable(): boolean {
 
 // 数据库查询函数
 export async function getAllSeries(): Promise<Series[]> {
-  // 如果数据库不可用，返回模拟数据
+  // 如果数据库不可用，使用内存存储
   if (!isDatabaseAvailable()) {
-    console.log('使用模拟数据：系列列表');
-    return mockSeries;
+    console.log('使用内存存储：系列列表');
+    const { getAllSeriesFromMemory } = await import('./memory-store');
+    return getAllSeriesFromMemory();
   }
 
   try {
@@ -150,16 +151,18 @@ export async function getAllSeries(): Promise<Series[]> {
     `;
     return rows as Series[];
   } catch (error) {
-    console.error('数据库查询失败，使用模拟数据:', error);
-    return mockSeries;
+    console.error('数据库查询失败，使用内存存储:', error);
+    const { getAllSeriesFromMemory } = await import('./memory-store');
+    return getAllSeriesFromMemory();
   }
 }
 
 export async function getSeriesBySlug(slug: string): Promise<Series | null> {
-  // 如果数据库不可用，从模拟数据中查找
+  // 如果数据库不可用，使用内存存储
   if (!isDatabaseAvailable()) {
-    console.log('使用模拟数据：根据slug查找系列');
-    return mockSeries.find(series => series.slug === slug) || null;
+    console.log('使用内存存储：根据slug查找系列');
+    const { getSeriesBySlugFromMemory } = await import('./memory-store');
+    return getSeriesBySlugFromMemory(slug);
   }
 
   try {
@@ -170,23 +173,18 @@ export async function getSeriesBySlug(slug: string): Promise<Series | null> {
     `;
     return rows[0] as Series || null;
   } catch (error) {
-    console.error('数据库查询失败，使用模拟数据:', error);
-    return mockSeries.find(series => series.slug === slug) || null;
+    console.error('数据库查询失败，使用内存存储:', error);
+    const { getSeriesBySlugFromMemory } = await import('./memory-store');
+    return getSeriesBySlugFromMemory(slug);
   }
 }
 
 export async function getFiguresBySeriesId(seriesId: number): Promise<Figure[]> {
-  // 如果数据库不可用，从模拟数据中查找
+  // 如果数据库不可用，使用内存存储
   if (!isDatabaseAvailable()) {
-    console.log('使用模拟数据：根据系列ID查找玩偶');
-    return mockFigures
-      .filter(figure => figure.seriesId === seriesId)
-      .sort((a, b) => {
-        if (a.isSecret !== b.isSecret) {
-          return a.isSecret ? 1 : -1; // 非隐藏款排在前面
-        }
-        return a.name.localeCompare(b.name);
-      });
+    console.log('使用内存存储：根据系列ID查找玩偶');
+    const { getFiguresBySeriesIdFromMemory } = await import('./memory-store');
+    return getFiguresBySeriesIdFromMemory(seriesId);
   }
 
   try {
@@ -197,7 +195,7 @@ export async function getFiguresBySeriesId(seriesId: number): Promise<Figure[]> 
     `;
     return rows as Figure[];
   } catch (error) {
-    console.error('数据库查询失败，使用模拟数据:', error);
+    console.error('数据库查询失败，使用内存存储:', error);
     return mockFigures
       .filter(figure => figure.seriesId === seriesId)
       .sort((a, b) => {
