@@ -189,38 +189,54 @@ export default async function HomePage() {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <div className="card-cute text-center hover-lift">
-              <div className="text-4xl mb-4 sparkle">🛍️</div>
-              <h4 className="font-bold text-lg text-cute-700 mb-3 font-comfortaa">Fashion Accessory</h4>
-              <p className="text-sm text-cute-600">
-                Plush keychains transformed Labubu from collectibles to wearable fashion items, 
-                becoming the breakthrough point! ✨
-              </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+            <div className="group relative">
+              <div className="card-cute text-center hover-lift h-full flex flex-col justify-between p-8 min-h-[280px]">
+                <div className="flex-shrink-0">
+                  <div className="text-5xl mb-6 sparkle group-hover:scale-110 transition-transform duration-300">🛍️</div>
+                  <h4 className="font-bold text-xl text-cute-700 mb-4 font-comfortaa leading-tight">Fashion Accessory</h4>
+                </div>
+                <p className="text-sm text-cute-600 leading-relaxed flex-grow flex items-center">
+                  Plush keychains transformed Labubu from collectibles to wearable fashion items, 
+                  becoming the breakthrough point! ✨
+                </p>
+              </div>
             </div>
-            <div className="card-cute text-center hover-lift">
-              <div className="text-4xl mb-4 sparkle">📱</div>
-              <h4 className="font-bold text-lg text-cute-700 mb-3 font-comfortaa">Social Media Viral</h4>
-              <p className="text-sm text-cute-600">
-                User-generated content on TikTok and other platforms created powerful word-of-mouth, 
-                attracting massive new fans! 🌟
-              </p>
+            <div className="group relative">
+              <div className="card-cute text-center hover-lift h-full flex flex-col justify-between p-8 min-h-[280px]">
+                <div className="flex-shrink-0">
+                  <div className="text-5xl mb-6 sparkle group-hover:scale-110 transition-transform duration-300">📱</div>
+                  <h4 className="font-bold text-xl text-cute-700 mb-4 font-comfortaa leading-tight">Social Media Viral</h4>
+                </div>
+                <p className="text-sm text-cute-600 leading-relaxed flex-grow flex items-center">
+                  User-generated content on TikTok and other platforms created powerful word-of-mouth, 
+                  attracting massive new fans! 🌟
+                </p>
+              </div>
             </div>
-            <div className="card-cute text-center hover-lift">
-              <div className="text-4xl mb-4 sparkle">⭐</div>
-              <h4 className="font-bold text-lg text-cute-700 mb-3 font-comfortaa">Celebrity Effect</h4>
-              <p className="text-sm text-cute-600">
-                International stars like BLACKPINK's Lisa greatly boosted global recognition 
-                and popularity! 💫
-              </p>
+            <div className="group relative">
+              <div className="card-cute text-center hover-lift h-full flex flex-col justify-between p-8 min-h-[280px]">
+                <div className="flex-shrink-0">
+                  <div className="text-5xl mb-6 sparkle group-hover:scale-110 transition-transform duration-300">⭐</div>
+                  <h4 className="font-bold text-xl text-cute-700 mb-4 font-comfortaa leading-tight">Celebrity Effect</h4>
+                </div>
+                <p className="text-sm text-cute-600 leading-relaxed flex-grow flex items-center">
+                  International stars like BLACKPINK's Lisa greatly boosted global recognition 
+                  and popularity! 💫
+                </p>
+              </div>
             </div>
-            <div className="card-cute text-center hover-lift">
-              <div className="text-4xl mb-4 sparkle">🎁</div>
-              <h4 className="font-bold text-lg text-cute-700 mb-3 font-comfortaa">Blind Box Magic</h4>
-              <p className="text-sm text-cute-600">
-                The thrill of unknown surprises drives purchase desire and repeat buying, 
-                fueling collection passion! 💕
-              </p>
+            <div className="group relative">
+              <div className="card-cute text-center hover-lift h-full flex flex-col justify-between p-8 min-h-[280px]">
+                <div className="flex-shrink-0">
+                  <div className="text-5xl mb-6 sparkle group-hover:scale-110 transition-transform duration-300">🎁</div>
+                  <h4 className="font-bold text-xl text-cute-700 mb-4 font-comfortaa leading-tight">Blind Box Magic</h4>
+                </div>
+                <p className="text-sm text-cute-600 leading-relaxed flex-grow flex items-center">
+                  The thrill of unknown surprises drives purchase desire and repeat buying, 
+                  fueling collection passion! 💕
+                </p>
+              </div>
             </div>
           </div>
 
