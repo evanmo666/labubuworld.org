@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1,
+    "name": "Salad",
+    "description": "Salad",
+    "imageUrl": "https://i.ibb.co/d4X3fZKh/20250606-150551-968254-14-the-monsters-wacky-mart-series-figures-blind-boxes-details-popmart-us-1200.webp",
+    "isSecret": false,
+    "seriesId": 1
+  },
+  {
+    "id": 2,
+    "name": "Canned Sardines",
+    "description": "Canned Sardines",
+    "imageUrl": "https://i.ibb.co/4ncH6jTQ/20250606-150551-955217-12-the-monsters-wacky-mart-series-figures-blind-boxes-details-popmart-us-1200.webp",
+    "isSecret": false,
+    "seriesId": 1
+  },
+  {
+    "id": 3,
+    "name": "Microwave Oven",
+    "description": "Microwave Oven",
+    "imageUrl": "https://i.ibb.co/nNNx1s29/20250606-150551-811663-18-the-monsters-wacky-mart-series-figures-blind-boxes-details-popmart-us-1200.webp",
+    "isSecret": true,
+    "seriesId": 1
+  },
+  {
+    "id": 4,
+    "name": "Fried Shrimp",
+    "description": "Fried Shrimp",
+    "imageUrl": "https://i.ibb.co/jkXYSW79/20250606-150551-794474-11-the-monsters-wacky-mart-series-figures-blind-boxes-details-popmart-us-1200.webp",
+    "isSecret": false,
+    "seriesId": 1
+  },
+  {
+    "id": 5,
+    "name": "Corn",
+    "description": "Corn",
+    "imageUrl": "https://i.ibb.co/r8sZ1hr/20250606-150551-615619-10-the-monsters-wacky-mart-series-figures-blind-boxes-details-popmart-us-1200.webp",
+    "isSecret": false,
+    "seriesId": 1
+  },
+  {
+    "id": 6,
+    "name": "Chow Mein",
+    "description": "Chow Mein",
+    "imageUrl": "https://i.ibb.co/PsFfFSM7/20250606-150551-560979-16-the-monsters-wacky-mart-series-figures-blind-boxes-details-popmart-us-1200.webp",
+    "isSecret": false,
+    "seriesId": 1
+  },
+  {
+    "id": 7,
+    "name": "Cup Noodles",
+    "description": "Cup Noodles",
+    "imageUrl": "https://i.ibb.co/j9q1yQZ5/20250606-150551-547805-7-the-monsters-wacky-mart-series-figures-blind-boxes-details-popmart-us-1200x.webp",
+    "isSecret": false,
+    "seriesId": 1
+  },
+  {
+    "id": 8,
+    "name": "Sandwich",
+    "description": "Sandwich",
+    "imageUrl": "https://i.ibb.co/v4nMTR47/20250606-150551-458698-13-the-monsters-wacky-mart-series-figures-blind-boxes-details-popmart-us-1200.webp",
+    "isSecret": false,
+    "seriesId": 1
+  },
+  {
+    "id": 9,
+    "name": "Onigiri",
+    "description": "Onigiri",
+    "imageUrl": "https://i.ibb.co/sdyqWPCc/20250606-150551-447622-17-the-monsters-wacky-mart-series-figures-blind-boxes-details-popmart-us-1200.webp",
+    "isSecret": false,
+    "seriesId": 1
+  },
+  {
+    "id": 10,
+    "name": "Yakitori",
+    "description": "Yakitori",
+    "imageUrl": "https://i.ibb.co/3Yy9Vzqg/20250606-150551-438092-15-the-monsters-wacky-mart-series-figures-blind-boxes-details-popmart-us-1200.webp",
+    "isSecret": false,
+    "seriesId": 1
+  },
+  {
+    "id": 11,
+    "name": "Chips",
+    "description": "Chips",
+    "imageUrl": "https://i.ibb.co/6RqLrhRP/20250606-150551-242418-9-the-monsters-wacky-mart-series-figures-blind-boxes-details-popmart-us-1200x.webp",
+    "isSecret": false,
+    "seriesId": 1
+  },
+  {
+    "id": 12,
+    "name": "MiLk",
+    "description": "MiLk",
+    "imageUrl": "https://i.ibb.co/27CVkLs4/20250606-150550-648303-8-the-monsters-wacky-mart-series-figures-blind-boxes-details-popmart-us-1200x.webp",
+    "isSecret": false,
+    "seriesId": 1
+  },
+  {
+    "id": 13,
+    "name": "Grilled Sausage",
+    "description": "Grilled Sausage",
+    "imageUrl": "https://i.ibb.co/xKcqg7fm/20250606-150520-865441-2-the-monsters-wacky-mart-series-figures-blind-boxes-details-popmart-us-1200x.jpg",
+    "isSecret": false,
+    "seriesId": 1
+  }
+]
