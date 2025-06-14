@@ -17,22 +17,35 @@ export default async function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero 区域 */}
-      <section className="relative bg-gradient-to-br from-pink-400 via-purple-500 to-cute-500 text-white overflow-hidden">
-        <div className="absolute inset-0 bg-white/10"></div>
+      <section className="relative text-white overflow-hidden min-h-[600px] flex items-center">
+        {/* 背景图片层 */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('/images/hero-background.jpg')"
+          }}
+        ></div>
+        
+        {/* 渐变遮罩层 - 确保文字可读性 */}
+        <div className="absolute inset-0 bg-gradient-to-br from-pink-500/80 via-purple-600/75 to-cute-600/80"></div>
+        
+        {/* 额外的深色遮罩层 - 进一步提升文字对比度 */}
+        <div className="absolute inset-0 bg-black/20"></div>
+        
         {/* 可爱的装饰元素 */}
         <div className="absolute top-10 left-10 w-20 h-20 bg-white/20 rounded-full float-animation"></div>
         <div className="absolute top-32 right-20 w-16 h-16 bg-pink-300/30 rounded-full float-animation" style={{animationDelay: '1s'}}></div>
         <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-purple-300/30 rounded-full float-animation" style={{animationDelay: '2s'}}></div>
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 z-10">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 font-comfortaa">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 font-comfortaa text-white drop-shadow-lg">
               ✨ Labubu World ✨
             </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto font-quicksand">
+            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto font-quicksand text-white drop-shadow-md">
               Your Ultimate Collection Guide 💕
             </p>
-            <p className="text-lg mb-12 max-w-2xl mx-auto opacity-90">
+            <p className="text-lg mb-12 max-w-2xl mx-auto text-white/95 drop-shadow-md">
               Discover the magical world of Labubu collectible figures! 🌟 
               Explore series guides, learn authenticity tips, and stay updated with the latest news! 
             </p>
