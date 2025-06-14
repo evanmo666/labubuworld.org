@@ -2,50 +2,118 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 自定义样式 */
+/* 自定义可爱样式 */
 html {
   scroll-behavior: smooth;
 }
 
-/* 隐藏款徽章样式 */
+body {
+  background: linear-gradient(135deg, #fdf2f8 0%, #fae8ff 50%, #f3e8ff 100%);
+  min-height: 100vh;
+}
+
+/* 隐藏款徽章样式 - 更可爱的金色 */
 .secret-badge {
-  @apply absolute top-2 right-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg;
+  @apply absolute top-2 right-2 bg-gradient-to-r from-yellow-300 to-pink-400 text-white text-xs font-bold px-3 py-1 rounded-full shadow-cute;
+  animation: sparkle 2s ease-in-out infinite alternate;
 }
 
-/* 加载动画 */
+@keyframes sparkle {
+  0% { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1.05) rotate(2deg); }
+}
+
+/* 可爱的加载动画 */
 .loading-spinner {
-  @apply animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600;
+  @apply animate-spin rounded-full h-8 w-8 border-b-2 border-pink-500;
 }
 
-/* 悬停效果 */
+/* 可爱的悬停效果 */
 .hover-lift {
-  @apply transition-transform duration-300 hover:-translate-y-2;
+  @apply transition-all duration-300 hover:-translate-y-2 hover:scale-105;
 }
 
-/* 卡片阴影效果 */
+/* 可爱的卡片阴影效果 */
 .card-shadow {
-  @apply shadow-lg hover:shadow-xl transition-shadow duration-300;
+  @apply shadow-cute hover:shadow-warm transition-all duration-300;
 }
 
-/* 渐变背景 */
+/* 可爱的渐变背景 */
 .gradient-bg {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #fce7f3 0%, #e0e7ff 50%, #f3e8ff 100%);
 }
 
-/* 自定义滚动条 */
+/* 可爱的按钮样式 */
+.btn-cute {
+  @apply bg-gradient-to-r from-pink-400 to-purple-500 text-white font-medium px-6 py-3 rounded-cute shadow-cute hover:shadow-warm transition-all duration-300 hover:scale-105;
+}
+
+.btn-cute:hover {
+  background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+}
+
+/* 可爱的输入框样式 */
+.input-cute {
+  @apply border-2 border-pink-200 rounded-cute px-4 py-2 focus:border-pink-400 focus:ring-2 focus:ring-pink-200 transition-all duration-300;
+}
+
+/* 可爱的滚动条 */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: linear-gradient(135deg, #fce7f3, #e0e7ff);
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
+  background: linear-gradient(135deg, #ec4899, #8b5cf6);
+  border-radius: 10px;
+  border: 2px solid #fce7f3;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: linear-gradient(135deg, #db2777, #7c3aed);
+}
+
+/* 可爱的文字选择效果 */
+::selection {
+  background: #fce7f3;
+  color: #be185d;
+}
+
+/* 可爱的链接样式 */
+.link-cute {
+  @apply text-cute-600 hover:text-cute-500 transition-colors duration-300 hover:underline decoration-2 decoration-pink-300;
+}
+
+/* 可爱的标题样式 */
+.title-cute {
+  @apply font-round text-cute-700 bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent;
+}
+
+/* 可爱的卡片样式 */
+.card-cute {
+  @apply bg-white/80 backdrop-blur-sm rounded-2xl shadow-cute border border-pink-100 hover:shadow-warm transition-all duration-300 hover:scale-105;
+}
+
+/* 可爱的动画效果 */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* 可爱的脉冲效果 */
+@keyframes pulse-cute {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.pulse-cute {
+  animation: pulse-cute 2s ease-in-out infinite;
 } 

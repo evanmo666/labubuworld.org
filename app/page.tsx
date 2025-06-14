@@ -17,32 +17,37 @@ export default async function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero 区域 */}
-      <section className="relative bg-gradient-to-br from-purple-600 via-blue-600 to-pink-600 text-white">
-        <div className="absolute inset-0 bg-black/30"></div>
+      <section className="relative bg-gradient-to-br from-pink-400 via-purple-500 to-cute-500 text-white overflow-hidden">
+        <div className="absolute inset-0 bg-white/10"></div>
+        {/* 可爱的装饰元素 */}
+        <div className="absolute top-10 left-10 w-20 h-20 bg-white/20 rounded-full float-animation"></div>
+        <div className="absolute top-32 right-20 w-16 h-16 bg-pink-300/30 rounded-full float-animation" style={{animationDelay: '1s'}}></div>
+        <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-purple-300/30 rounded-full float-animation" style={{animationDelay: '2s'}}></div>
+        
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Labubu World
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 font-round">
+              ✨ Labubu World ✨
             </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-              Your Ultimate Collection Guide
+            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto font-round">
+              Your Ultimate Collection Guide 💕
             </p>
             <p className="text-lg mb-12 max-w-2xl mx-auto opacity-90">
-              Discover the magical world of Labubu collectible figures, explore series guides, 
-              learn authenticity tips, and stay updated with the latest news.
+              Discover the magical world of Labubu collectible figures! 🌟 
+              Explore series guides, learn authenticity tips, and stay updated with the latest news! 
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 href="/series" 
-                className="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300"
+                className="btn-cute"
               >
-                Explore Series
+                📚 Explore Series
               </Link>
               <Link 
                 href="/guides/how-to-spot-fake" 
-                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition-colors duration-300"
+                className="border-2 border-white text-white px-8 py-4 rounded-cute font-semibold hover:bg-white hover:text-cute-600 transition-all duration-300 hover:scale-105"
               >
-                Real VS Fake Labubu
+                🔍 Real VS Fake Guide
               </Link>
             </div>
           </div>
@@ -50,14 +55,14 @@ export default async function HomePage() {
       </section>
 
       {/* 精选系列区域 */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 gradient-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Featured Series
+            <h2 className="text-3xl md:text-4xl font-bold title-cute mb-4 font-round">
+              ✨ Featured Series ✨
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Explore the latest and most popular Labubu series collections
+            <p className="text-lg text-cute-600 max-w-2xl mx-auto">
+              Explore the latest and most popular Labubu series collections! 💖
             </p>
           </div>
 
@@ -68,25 +73,25 @@ export default async function HomePage() {
                 href={`/series/${series.slug}`}
                 className="group"
               >
-                <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 hover-lift">
+                <div className="card-cute hover-lift">
                   <div className="aspect-square relative">
                     <Image
                       src={series.coverImageUrl || '/images/placeholder-series.jpg'}
                       alt={series.name}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="object-cover group-hover:scale-105 transition-transform duration-300 rounded-t-2xl"
                     />
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
+                    <h3 className="text-xl font-semibold text-cute-700 mb-2 group-hover:text-cute-500 transition-colors font-round">
                       {series.name}
                     </h3>
                     {series.releaseDate && (
-                      <p className="text-sm text-gray-500 mb-3">
-                        Released: {new Date(series.releaseDate).toLocaleDateString()}
+                      <p className="text-sm text-cute-500 mb-3">
+                        📅 Released: {new Date(series.releaseDate).toLocaleDateString()}
                       </p>
                     )}
-                    <p className="text-gray-600 text-sm line-clamp-3">
+                    <p className="text-cute-600 text-sm line-clamp-3">
                       {series.description}
                     </p>
                   </div>
@@ -98,9 +103,9 @@ export default async function HomePage() {
           <div className="text-center mt-12">
             <Link 
               href="/series" 
-              className="inline-flex items-center px-6 py-3 border border-purple-600 text-purple-600 rounded-lg hover:bg-purple-600 hover:text-white transition-colors duration-300"
+              className="btn-cute inline-flex items-center"
             >
-              View All Series
+              📚 View All Series
               <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
@@ -110,14 +115,14 @@ export default async function HomePage() {
       </section>
 
       {/* 最新资讯区域 */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Latest News
+            <h2 className="text-3xl md:text-4xl font-bold title-cute mb-4 font-round">
+              📰 Latest News 📰
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Stay updated with the latest Labubu news, releases, and community updates
+            <p className="text-lg text-cute-600 max-w-2xl mx-auto">
+              Stay updated with the latest Labubu news, releases, and community updates! 🌟
             </p>
           </div>
 
@@ -128,23 +133,23 @@ export default async function HomePage() {
                 href={`/news/${news.slug}`}
                 className="group"
               >
-                <article className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <article className="card-cute hover-lift">
                   <div className="aspect-video relative">
                     <Image
                       src={news.imageUrl || '/images/placeholder-news.jpg'}
                       alt={news.title}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="object-cover group-hover:scale-105 transition-transform duration-300 rounded-t-2xl"
                     />
                   </div>
                   <div className="p-6">
-                    <time className="text-sm text-gray-500 mb-2 block">
-                      {new Date(news.publishedAt).toLocaleDateString()}
+                    <time className="text-sm text-cute-500 mb-2 block">
+                      📅 {new Date(news.publishedAt).toLocaleDateString()}
                     </time>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors">
+                    <h3 className="text-xl font-semibold text-cute-700 mb-3 group-hover:text-cute-500 transition-colors font-round">
                       {news.title}
                     </h3>
-                    <p className="text-gray-600 text-sm line-clamp-3">
+                    <p className="text-cute-600 text-sm line-clamp-3">
                       {news.content.replace(/<[^>]*>/g, '').substring(0, 120)}...
                     </p>
                   </div>
@@ -156,9 +161,9 @@ export default async function HomePage() {
           <div className="text-center mt-12">
             <Link 
               href="/news" 
-              className="inline-flex items-center px-6 py-3 border border-purple-600 text-purple-600 rounded-lg hover:bg-purple-600 hover:text-white transition-colors duration-300"
+              className="btn-cute inline-flex items-center"
             >
-              Read All News
+              📰 Read All News
               <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>

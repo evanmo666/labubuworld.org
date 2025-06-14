@@ -72,7 +72,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         {/* 导航栏 */}
-        <nav className="bg-white shadow-lg border-b border-gray-200">
+        <nav className="bg-gradient-to-r from-pink-50 to-purple-50 shadow-cute border-b border-pink-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-16">
               <div className="flex items-center">
@@ -82,34 +82,34 @@ export default function RootLayout({
                     alt="Labubu Logo"
                     width={40}
                     height={40}
-                    className="rounded-lg"
+                    className="rounded-cute hover:scale-110 transition-transform duration-300"
                   />
-                  <span className="text-2xl font-bold text-primary-600">Labubu World</span>
+                  <span className="text-2xl font-bold text-cute-600 font-round">Labubu World ✨</span>
                 </a>
               </div>
               
               {/* 主导航菜单 */}
-              <div className="hidden md:flex items-center space-x-8">
-                <a href="/" className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">
-                  Home
+              <div className="hidden md:flex items-center space-x-6">
+                <a href="/" className="text-cute-700 hover:text-cute-500 px-4 py-2 text-sm font-medium transition-all duration-300 rounded-cute hover:bg-pink-100">
+                  🏠 Home
                 </a>
-                <a href="/series" className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">
-                  Series
+                <a href="/series" className="text-cute-700 hover:text-cute-500 px-4 py-2 text-sm font-medium transition-all duration-300 rounded-cute hover:bg-pink-100">
+                  📚 Series
                 </a>
-                <a href="/guides/how-to-spot-fake" className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">
-                  Real VS Fake Labubu
+                <a href="/guides/how-to-spot-fake" className="text-cute-700 hover:text-cute-500 px-4 py-2 text-sm font-medium transition-all duration-300 rounded-cute hover:bg-pink-100">
+                  🔍 Real VS Fake
                 </a>
-                <a href="/news" className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">
-                  News
+                <a href="/news" className="text-cute-700 hover:text-cute-500 px-4 py-2 text-sm font-medium transition-all duration-300 rounded-cute hover:bg-pink-100">
+                  📰 News
                 </a>
-                <a href="/about" className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">
-                  About
+                <a href="/about" className="text-cute-700 hover:text-cute-500 px-4 py-2 text-sm font-medium transition-all duration-300 rounded-cute hover:bg-pink-100">
+                  💖 About
                 </a>
               </div>
 
               {/* 移动端菜单按钮 */}
               <div className="md:hidden flex items-center">
-                <button className="text-gray-700 hover:text-primary-600 focus:outline-none focus:text-primary-600">
+                <button className="text-cute-700 hover:text-cute-500 focus:outline-none focus:text-cute-500 p-2 rounded-cute hover:bg-pink-100 transition-all duration-300">
                   <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"/>
                   </svg>
@@ -125,7 +125,7 @@ export default function RootLayout({
         </main>
 
         {/* 页脚 */}
-        <footer className="bg-gray-900 text-white">
+        <footer className="bg-gradient-to-r from-pink-100 to-purple-100 text-cute-800">
           <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div>
@@ -135,40 +135,41 @@ export default function RootLayout({
                     alt="Labubu Logo"
                     width={32}
                     height={32}
-                    className="rounded-lg"
+                    className="rounded-cute hover:scale-110 transition-transform duration-300"
                   />
-                  <h3 className="text-lg font-semibold">Labubu World</h3>
+                  <h3 className="text-lg font-semibold font-round">Labubu World ✨</h3>
                 </div>
-                <p className="text-gray-400 text-sm">
-                  Your ultimate guide to the magical world of Labubu collectible figures.
+                <p className="text-cute-600 text-sm">
+                  Your ultimate guide to the magical world of Labubu collectible figures! 💕
                   Discover series, authenticity tips, and latest news.
                 </p>
               </div>
               
               <div>
-                <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-                <ul className="space-y-2 text-sm">
-                  <li><a href="/series" className="text-gray-400 hover:text-white transition-colors">All Series</a></li>
-                  <li><a href="/guides/how-to-spot-fake" className="text-gray-400 hover:text-white transition-colors">Real VS Fake Labubu</a></li>
-                  <li><a href="/news" className="text-gray-400 hover:text-white transition-colors">Latest News</a></li>
-                  <li><a href="/about" className="text-gray-400 hover:text-white transition-colors">About</a></li>
+                <h3 className="text-lg font-semibold mb-4 font-round">🔗 Quick Links</h3>
+                <ul className="space-y-3 text-sm">
+                  <li><a href="/series" className="text-cute-600 hover:text-cute-500 transition-colors hover:underline">📚 All Series</a></li>
+                  <li><a href="/guides/how-to-spot-fake" className="text-cute-600 hover:text-cute-500 transition-colors hover:underline">🔍 Real VS Fake Guide</a></li>
+                  <li><a href="/news" className="text-cute-600 hover:text-cute-500 transition-colors hover:underline">📰 Latest News</a></li>
+                  <li><a href="/about" className="text-cute-600 hover:text-cute-500 transition-colors hover:underline">💖 About Us</a></li>
                 </ul>
               </div>
               
               <div>
-                <h3 className="text-lg font-semibold mb-4">Legal</h3>
-                <ul className="space-y-2 text-sm">
-                  <li><span className="text-gray-400">Privacy Policy</span></li>
-                  <li><span className="text-gray-400">Terms of Service</span></li>
-                  <li><span className="text-gray-400">Disclaimer</span></li>
+                <h3 className="text-lg font-semibold mb-4 font-round">📋 Legal</h3>
+                <ul className="space-y-3 text-sm">
+                  <li><span className="text-cute-600">🔒 Privacy Policy</span></li>
+                  <li><span className="text-cute-600">📜 Terms of Service</span></li>
+                  <li><span className="text-cute-600">⚠️ Disclaimer</span></li>
                 </ul>
               </div>
             </div>
             
-            <div className="mt-8 pt-8 border-t border-gray-800 text-center">
-              <p className="text-gray-400 text-sm">
-                © 2024 Labubu World. This is an unofficial fan site. 
-                Labubu is a trademark of POP MART and Kasing Lung.
+            <div className="mt-8 pt-8 border-t border-pink-200 text-center">
+              <p className="text-cute-600 text-sm">
+                © 2024 Labubu World ✨ This is an unofficial fan site made with 💕
+                <br />
+                Labubu is a trademark of POP MART and Kasing Lung 🎨
               </p>
             </div>
           </div>
