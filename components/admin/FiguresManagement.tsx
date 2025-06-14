@@ -148,6 +148,12 @@ export function FiguresManagement() {
     return seriesItem?.name || 'Unknown Series'
   }
 
+  // 获取系列slug
+  const getSeriesSlug = (seriesId: number) => {
+    const seriesItem = series.find(s => s.id === seriesId)
+    return seriesItem?.slug || ''
+  }
+
   // 过滤玩偶
   const filteredFigures = selectedSeries 
     ? figures.filter(f => f.seriesId === selectedSeries)
@@ -292,6 +298,13 @@ export function FiguresManagement() {
                       >
                         Delete
                       </button>
+                      <Link
+                        href={`/series/${getSeriesSlug(figure.seriesId)}`}
+                        target="_blank"
+                        className="text-green-600 hover:text-green-900"
+                      >
+                        View Series
+                      </Link>
                     </td>
                   </tr>
                 ))}
@@ -422,11 +435,39 @@ function FigureForm({
                 value={formData.imageUrl}
                 onChange={(e) => setFormData(prev => ({ ...prev, imageUrl: e.target.value }))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="https://example.com/image.jpg"
+                placeholder="https://i.ibb.co/xxxxxx/image.jpg"
               />
-              <p className="text-xs text-gray-500 mt-1">
-                支持ImgBB链接，系统会自动转换格式
-              </p>
+              <div className="mt-2 space-y-1">
+                <p className="text-xs text-gray-500">
+                  💡 支持ImgBB链接，系统会自动转换格式
+                </p>
+                <p className="text-xs text-blue-600">
+                  📝 ImgBB格式：https://ibb.co/Q7dVLbBz → 自动转换为直接链接
+                </p>
+                <p className="text-xs text-green-600">
+                  ✅ 直接链接格式：https://i.ibb.co/xxxxxx/image.jpg
+                </p>
+              </div>
+              {formData.imageUrl && (
+                <div className="mt-3">
+                  <p className="text-xs font-medium text-gray-700 mb-2">图片预览：</p>
+                  <div className="w-20 h-20 border border-gray-300 rounded-lg overflow-hidden bg-gray-50">
+                    <img
+                      src={formData.imageUrl}
+                      alt="Preview"
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        target.nextElementSibling!.textContent = '❌ 图片加载失败';
+                      }}
+                    />
+                    <div className="w-full h-full flex items-center justify-center text-xs text-gray-400 hidden">
+                      ❌ 图片加载失败
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
             <div>

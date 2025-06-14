@@ -218,6 +218,37 @@ export function DashboardContent() {
                   </div>
                 </div>
               </Link>
+
+              <Link
+                href="/admin/help/image-guide"
+                className="block p-4 border border-gray-200 rounded-lg hover:border-orange-500 hover:shadow-md transition-all"
+              >
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                    <span className="text-orange-600 font-bold">📸</span>
+                  </div>
+                  <div className="ml-3">
+                    <h3 className="text-sm font-medium text-gray-900">图片URL指南</h3>
+                    <p className="text-sm text-gray-500">学习如何正确使用图床链接</p>
+                  </div>
+                </div>
+              </Link>
+
+              <Link
+                href="/"
+                target="_blank"
+                className="block p-4 border border-gray-200 rounded-lg hover:border-indigo-500 hover:shadow-md transition-all"
+              >
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
+                    <span className="text-indigo-600 font-bold">🌐</span>
+                  </div>
+                  <div className="ml-3">
+                    <h3 className="text-sm font-medium text-gray-900">查看网站</h3>
+                    <p className="text-sm text-gray-500">在新窗口中打开前台网站</p>
+                  </div>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
