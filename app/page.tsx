@@ -172,143 +172,116 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 解码 Labubu 狂热现象 */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-pink-50 to-purple-50">
+      {/* Decoding Labubu Craze 解码 Labubu 狂热现象 */}
+      <section className="py-16 md:py-24 gradient-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold title-cute mb-4 font-comfortaa">
-              🔍 解码 Labubu 狂热现象 🔍
+              🔍 Decoding Labubu Craze 🔍
             </h2>
             <p className="text-lg text-cute-600 max-w-2xl mx-auto mb-4">
-              从小众玩具到全球风尚，Labubu的崛起并非偶然。
+              From niche toy to global phenomenon, Labubu's rise is no accident. ✨
             </p>
-            <p className="max-w-3xl mx-auto text-cute-700">
-              这部分将通过互动图表和关键数据，为您揭示Labubu如何成为Pop Mart的"摇钱树"。图表展示了Pop Mart在2024年的IP收入构成，您可以直观地看到Labubu的巨大贡献。同时，我们还列出了推动这场热潮的关键因素和令人瞩目的市场数据。
+            <p className="text-cute-700 max-w-4xl mx-auto">
+              This section reveals the key factors behind Labubu's transformation into Pop Mart's "money tree" 💰 
+              through interactive charts and crucial data. The chart shows Pop Mart's 2024 IP revenue breakdown, 
+              highlighting Labubu's massive contribution alongside the driving forces behind this craze! 📊
             </p>
           </div>
           
-          {/* 四个关键因素 */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             <div className="card-cute text-center hover-lift">
-              <div className="text-4xl mb-4">🛍️</div>
-              <h4 className="font-bold text-lg text-cute-700 mb-3 font-comfortaa">时尚配饰</h4>
+              <div className="text-4xl mb-4 sparkle">🛍️</div>
+              <h4 className="font-bold text-lg text-cute-700 mb-3 font-comfortaa">Fashion Accessory</h4>
               <p className="text-sm text-cute-600">
-                毛绒挂件将Labubu从收藏品变为可随身携带的时尚单品，成为引爆点。
+                Plush keychains transformed Labubu from collectibles to wearable fashion items, 
+                becoming the breakthrough point! ✨
               </p>
             </div>
             <div className="card-cute text-center hover-lift">
-              <div className="text-4xl mb-4">📱</div>
-              <h4 className="font-bold text-lg text-cute-700 mb-3 font-comfortaa">社媒病毒</h4>
+              <div className="text-4xl mb-4 sparkle">📱</div>
+              <h4 className="font-bold text-lg text-cute-700 mb-3 font-comfortaa">Social Media Viral</h4>
               <p className="text-sm text-cute-600">
-                TikTok等平台上的用户自发内容形成强大口碑，吸引大量新粉丝。
+                User-generated content on TikTok and other platforms created powerful word-of-mouth, 
+                attracting massive new fans! 🌟
               </p>
             </div>
             <div className="card-cute text-center hover-lift">
-              <div className="text-4xl mb-4">⭐</div>
-              <h4 className="font-bold text-lg text-cute-700 mb-3 font-comfortaa">明星效应</h4>
+              <div className="text-4xl mb-4 sparkle">⭐</div>
+              <h4 className="font-bold text-lg text-cute-700 mb-3 font-comfortaa">Celebrity Effect</h4>
               <p className="text-sm text-cute-600">
-                BLACKPINK Lisa等国际明星的喜爱，极大提升了其全球知名度。
+                International stars like BLACKPINK's Lisa greatly boosted global recognition 
+                and popularity! 💫
               </p>
             </div>
             <div className="card-cute text-center hover-lift">
-              <div className="text-4xl mb-4">🎁</div>
-              <h4 className="font-bold text-lg text-cute-700 mb-3 font-comfortaa">盲盒魔力</h4>
+              <div className="text-4xl mb-4 sparkle">🎁</div>
+              <h4 className="font-bold text-lg text-cute-700 mb-3 font-comfortaa">Blind Box Magic</h4>
               <p className="text-sm text-cute-600">
-                未知的惊喜感激发了消费者的购买欲和复购行为，驱动收藏热情。
+                The thrill of unknown surprises drives purchase desire and repeat buying, 
+                fueling collection passion! 💕
               </p>
             </div>
           </div>
 
-          {/* 收入图表区域 */}
           <div className="card-cute mb-12 p-6 md:p-8">
-            <h3 className="text-xl md:text-2xl font-bold text-center mb-6 text-cute-700 font-comfortaa">
-              📊 Pop Mart 2024年主要IP收入贡献（单位：亿美元）
+            <h3 className="text-xl md:text-2xl font-bold text-center mb-6 title-cute font-comfortaa">
+              📊 Pop Mart 2024 Major IP Revenue Contribution (USD Billions) 📊
             </h3>
-            <div className="space-y-4">
-              {/* Labubu */}
-              <div className="flex items-center">
-                <div className="w-20 text-sm text-cute-600 font-medium">Labubu</div>
-                <div className="flex-1 bg-cute-100 rounded-full h-8 relative overflow-hidden">
-                  <div 
-                    className="bg-gradient-to-r from-pink-400 to-purple-500 h-full rounded-full flex items-center justify-end pr-4 text-white font-bold text-sm"
-                    style={{width: '75%'}}
-                  >
-                    7.5
+            <div className="bg-gradient-to-r from-pink-100 to-purple-100 p-6 rounded-2xl">
+              <div className="space-y-4">
+                <div className="flex items-center">
+                  <div className="w-20 text-sm font-medium text-cute-700">Labubu</div>
+                  <div className="flex-1 mx-4">
+                    <div className="bg-gradient-to-r from-pink-400 to-purple-500 h-8 rounded-full" style={{width: '85%'}}></div>
                   </div>
+                  <div className="w-16 text-sm font-bold text-cute-700">$8.5B</div>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-20 text-sm font-medium text-cute-700">Molly</div>
+                  <div className="flex-1 mx-4">
+                    <div className="bg-gradient-to-r from-orange-300 to-yellow-400 h-6 rounded-full" style={{width: '35%'}}></div>
+                  </div>
+                  <div className="w-16 text-sm font-bold text-cute-700">$3.5B</div>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-20 text-sm font-medium text-cute-700">SKULLPANDA</div>
+                  <div className="flex-1 mx-4">
+                    <div className="bg-gradient-to-r from-purple-300 to-pink-300 h-6 rounded-full" style={{width: '30%'}}></div>
+                  </div>
+                  <div className="w-16 text-sm font-bold text-cute-700">$3.0B</div>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-20 text-sm font-medium text-cute-700">Others</div>
+                  <div className="flex-1 mx-4">
+                    <div className="bg-gradient-to-r from-gray-300 to-gray-400 h-10 rounded-full" style={{width: '95%'}}></div>
+                  </div>
+                  <div className="w-16 text-sm font-bold text-cute-700">$9.5B</div>
                 </div>
               </div>
-              
-              {/* Molly */}
-              <div className="flex items-center">
-                <div className="w-20 text-sm text-cute-600 font-medium">Molly</div>
-                <div className="flex-1 bg-cute-100 rounded-full h-8 relative overflow-hidden">
-                  <div 
-                    className="bg-gradient-to-r from-pink-300 to-purple-400 h-full rounded-full flex items-center justify-end pr-4 text-white font-bold text-sm"
-                    style={{width: '35%'}}
-                  >
-                    3.5
-                  </div>
-                </div>
+              <div className="text-center mt-4 text-xs text-cute-600">
+                💡 Revenue in USD Billions
               </div>
-              
-              {/* SKULLPANDA */}
-              <div className="flex items-center">
-                <div className="w-20 text-sm text-cute-600 font-medium">SKULLPANDA</div>
-                <div className="flex-1 bg-cute-100 rounded-full h-8 relative overflow-hidden">
-                  <div 
-                    className="bg-gradient-to-r from-pink-300 to-purple-400 h-full rounded-full flex items-center justify-end pr-4 text-white font-bold text-sm"
-                    style={{width: '27%'}}
-                  >
-                    2.7
-                  </div>
-                </div>
-              </div>
-              
-              {/* 其他IP合计 */}
-              <div className="flex items-center">
-                <div className="w-20 text-sm text-cute-600 font-medium">其他IP合计</div>
-                <div className="flex-1 bg-cute-100 rounded-full h-8 relative overflow-hidden">
-                  <div 
-                    className="bg-gradient-to-r from-pink-200 to-purple-300 h-full rounded-full flex items-center justify-end pr-4 text-white font-bold text-sm"
-                    style={{width: '63%'}}
-                  >
-                    6.3
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* 图表说明 */}
-            <div className="mt-6 text-center">
-              <div className="flex justify-center items-center space-x-8 text-sm text-cute-600">
-                <span>0</span>
-                <span>2.5</span>
-                <span>5.0</span>
-                <span>7.5</span>
-                <span>10.0</span>
-              </div>
-              <p className="text-xs text-cute-500 mt-2">收入（亿美元）</p>
             </div>
           </div>
 
-          {/* 关键数据统计 */}
           <div className="grid md:grid-cols-2 gap-8 text-center">
             <div className="card-cute p-8 hover-lift">
               <p className="text-5xl font-bold text-gradient bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent mb-2">
                 $150,000+
               </p>
-              <p className="text-lg text-cute-700 font-semibold mb-2 font-comfortaa">艺术拍卖纪录</p>
-              <p className="text-sm text-cute-500">
-                2025年6月，一座四英尺高的Labubu雕塑在北京的拍卖成交价。
+              <p className="text-lg text-cute-700 font-semibold mb-2 font-comfortaa">🎨 Art Auction Record</p>
+              <p className="text-sm text-cute-600">
+                June 2025: A four-foot-tall Labubu sculpture sold at Beijing auction for this record price! 💰
               </p>
             </div>
             <div className="card-cute p-8 hover-lift">
               <p className="text-5xl font-bold text-gradient bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent mb-2">
                 +12%
               </p>
-              <p className="text-lg text-cute-700 font-semibold mb-2 font-comfortaa">"Kidult"市场增长</p>
-              <p className="text-sm text-cute-500">
-                2025年Q1，美国18岁以上成人玩具销售额同比增长。
+              <p className="text-lg text-cute-700 font-semibold mb-2 font-comfortaa">📈 "Kidult" Market Growth</p>
+              <p className="text-sm text-cute-600">
+                Q1 2025: US adult toy sales (18+) year-over-year growth rate shows the expanding market! 🚀
               </p>
             </div>
           </div>
