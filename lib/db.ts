@@ -196,22 +196,17 @@ export async function getFiguresBySeriesId(seriesId: number): Promise<Figure[]> 
     return rows as Figure[];
   } catch (error) {
     console.error('数据库查询失败，使用内存存储:', error);
-    return mockFigures
-      .filter(figure => figure.seriesId === seriesId)
-      .sort((a, b) => {
-        if (a.isSecret !== b.isSecret) {
-          return a.isSecret ? 1 : -1;
-        }
-        return a.name.localeCompare(b.name);
-      });
+    const { getFiguresBySeriesIdFromMemory } = await import('./memory-store');
+    return getFiguresBySeriesIdFromMemory(seriesId);
   }
 }
 
 export async function getAllNewsPosts(): Promise<NewsPost[]> {
-  // 如果数据库不可用，返回模拟数据
+  // 如果数据库不可用，使用内存存储
   if (!isDatabaseAvailable()) {
-    console.log('使用模拟数据：新闻列表');
-    return mockNews.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+    console.log('使用内存存储：新闻列表');
+    const { getAllNewsFromMemory } = await import('./memory-store');
+    return getAllNewsFromMemory();
   }
 
   try {
@@ -221,16 +216,18 @@ export async function getAllNewsPosts(): Promise<NewsPost[]> {
     `;
     return rows as NewsPost[];
   } catch (error) {
-    console.error('数据库查询失败，使用模拟数据:', error);
-    return mockNews.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+    console.error('数据库查询失败，使用内存存储:', error);
+    const { getAllNewsFromMemory } = await import('./memory-store');
+    return getAllNewsFromMemory();
   }
 }
 
 export async function getNewsPostBySlug(slug: string): Promise<NewsPost | null> {
-  // 如果数据库不可用，从模拟数据中查找
+  // 如果数据库不可用，使用内存存储
   if (!isDatabaseAvailable()) {
-    console.log('使用模拟数据：根据slug查找新闻');
-    return mockNews.find(news => news.slug === slug) || null;
+    console.log('使用内存存储：根据slug查找新闻');
+    const { getNewsBySlugFromMemory } = await import('./memory-store');
+    return getNewsBySlugFromMemory(slug);
   }
 
   try {
@@ -241,18 +238,18 @@ export async function getNewsPostBySlug(slug: string): Promise<NewsPost | null> 
     `;
     return rows[0] as NewsPost || null;
   } catch (error) {
-    console.error('数据库查询失败，使用模拟数据:', error);
-    return mockNews.find(news => news.slug === slug) || null;
+    console.error('数据库查询失败，使用内存存储:', error);
+    const { getNewsBySlugFromMemory } = await import('./memory-store');
+    return getNewsBySlugFromMemory(slug);
   }
 }
 
 export async function getLatestSeries(limit: number = 4): Promise<Series[]> {
-  // 如果数据库不可用，从模拟数据中获取
+  // 如果数据库不可用，使用内存存储
   if (!isDatabaseAvailable()) {
-    console.log('使用模拟数据：最新系列');
-    return mockSeries
-      .sort((a, b) => new Date(b.releaseDate || '').getTime() - new Date(a.releaseDate || '').getTime())
-      .slice(0, limit);
+    console.log('使用内存存储：最新系列');
+    const { getAllSeriesFromMemory } = await import('./memory-store');
+    return getAllSeriesFromMemory().slice(0, limit);
   }
 
   try {
@@ -263,20 +260,18 @@ export async function getLatestSeries(limit: number = 4): Promise<Series[]> {
     `;
     return rows as Series[];
   } catch (error) {
-    console.error('数据库查询失败，使用模拟数据:', error);
-    return mockSeries
-      .sort((a, b) => new Date(b.releaseDate || '').getTime() - new Date(a.releaseDate || '').getTime())
-      .slice(0, limit);
+    console.error('数据库查询失败，使用内存存储:', error);
+    const { getAllSeriesFromMemory } = await import('./memory-store');
+    return getAllSeriesFromMemory().slice(0, limit);
   }
 }
 
 export async function getLatestNewsPosts(limit: number = 3): Promise<NewsPost[]> {
-  // 如果数据库不可用，从模拟数据中获取
+  // 如果数据库不可用，使用内存存储
   if (!isDatabaseAvailable()) {
-    console.log('使用模拟数据：最新新闻');
-    return mockNews
-      .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
-      .slice(0, limit);
+    console.log('使用内存存储：最新新闻');
+    const { getAllNewsFromMemory } = await import('./memory-store');
+    return getAllNewsFromMemory().slice(0, limit);
   }
 
   try {
@@ -287,9 +282,8 @@ export async function getLatestNewsPosts(limit: number = 3): Promise<NewsPost[]>
     `;
     return rows as NewsPost[];
   } catch (error) {
-    console.error('数据库查询失败，使用模拟数据:', error);
-    return mockNews
-      .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
-      .slice(0, limit);
+    console.error('数据库查询失败，使用内存存储:', error);
+    const { getAllNewsFromMemory } = await import('./memory-store');
+    return getAllNewsFromMemory().slice(0, limit);
   }
 } 
