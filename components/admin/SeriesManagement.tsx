@@ -4,7 +4,16 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getAllSeries, type Series } from '@/lib/db'
+
+// 定义Series类型
+interface Series {
+  id: number
+  name: string
+  slug: string
+  releaseDate: string | null
+  description: string
+  coverImageUrl: string
+}
 
 export function SeriesManagement() {
   const router = useRouter()
@@ -25,8 +34,13 @@ export function SeriesManagement() {
 
   const loadSeries = async () => {
     try {
-      const data = await getAllSeries()
-      setSeries(data)
+      const response = await fetch('/api/admin/series')
+      if (response.ok) {
+        const data = await response.json()
+        setSeries(data)
+      } else {
+        console.error('加载系列失败:', response.statusText)
+      }
     } catch (error) {
       console.error('加载系列失败:', error)
     } finally {
@@ -41,10 +55,22 @@ export function SeriesManagement() {
 
   const handleDelete = async (id: number) => {
     if (confirm('确定要删除这个系列吗？这将同时删除该系列下的所有玩偶。')) {
-      // 这里应该调用删除API
-      console.log('删除系列:', id)
-      // 临时从列表中移除
-      setSeries(series.filter(s => s.id !== id))
+      try {
+        const response = await fetch(`/api/admin/series/${id}`, {
+          method: 'DELETE'
+        })
+        
+        if (response.ok) {
+          // 从列表中移除已删除的系列
+          setSeries(series.filter(s => s.id !== id))
+        } else {
+          console.error('删除系列失败:', response.statusText)
+          alert('删除系列失败，请重试')
+        }
+      } catch (error) {
+        console.error('删除系列失败:', error)
+        alert('删除系列失败，请重试')
+      }
     }
   }
 
@@ -52,28 +78,49 @@ export function SeriesManagement() {
     try {
       if (editingSeries) {
         // 更新现有系列
-        const updatedSeries = series.map(s => 
-          s.id === editingSeries.id 
-            ? { ...s, ...formData }
-            : s
-        )
-        setSeries(updatedSeries)
+        const response = await fetch(`/api/admin/series/${editingSeries.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        })
+        
+        if (response.ok) {
+          const updatedSeries = await response.json()
+          setSeries(series.map(s => 
+            s.id === editingSeries.id ? updatedSeries : s
+          ))
+        } else {
+          console.error('更新系列失败:', response.statusText)
+          alert('更新系列失败，请重试')
+          return
+        }
       } else {
         // 添加新系列
-        const newSeries: Series = {
-          id: Math.max(...series.map(s => s.id)) + 1,
-          name: formData.name || '',
-          slug: formData.slug || '',
-          releaseDate: formData.releaseDate || null,
-          description: formData.description || null,
-          coverImageUrl: formData.coverImageUrl || null
+        const response = await fetch('/api/admin/series', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        })
+        
+        if (response.ok) {
+          const newSeries = await response.json()
+          setSeries([...series, newSeries])
+        } else {
+          console.error('创建系列失败:', response.statusText)
+          alert('创建系列失败，请重试')
+          return
         }
-        setSeries([...series, newSeries])
       }
+      
       setShowAddForm(false)
       setEditingSeries(null)
     } catch (error) {
       console.error('保存系列失败:', error)
+      alert('保存系列失败，请重试')
     }
   }
 
@@ -201,6 +248,22 @@ export function SeriesManagement() {
             </table>
           </div>
         </div>
+
+        {/* 空状态 */}
+        {series.length === 0 && (
+          <div className="text-center py-12">
+            <div className="text-gray-500 text-lg">No series found</div>
+            <button
+              onClick={() => {
+                setEditingSeries(null)
+                setShowAddForm(true)
+              }}
+              className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+            >
+              Add First Series
+            </button>
+          </div>
+        )}
       </main>
 
       {/* 添加/编辑表单模态框 */}
@@ -249,108 +312,109 @@ function SeriesForm({
   }
 
   const handleNameChange = (name: string) => {
-    setFormData({
-      ...formData,
+    setFormData(prev => ({
+      ...prev,
       name,
-      slug: formData.slug || generateSlug(name)
-    })
+      slug: prev.slug || generateSlug(name)
+    }))
   }
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h3 className="text-lg font-medium text-gray-900">
+      <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
+        <div className="p-6">
+          <h3 className="text-lg font-medium text-gray-900 mb-4">
             {series ? 'Edit Series' : 'Add New Series'}
           </h3>
+          
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Series Name *
+              </label>
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => handleNameChange(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Slug *
+              </label>
+              <input
+                type="text"
+                value={formData.slug}
+                onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                URL-friendly identifier (e.g., "art-series")
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Release Date
+              </label>
+              <input
+                type="date"
+                value={formData.releaseDate}
+                onChange={(e) => setFormData(prev => ({ ...prev, releaseDate: e.target.value }))}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Description *
+              </label>
+              <textarea
+                value={formData.description}
+                onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+                rows={3}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Cover Image URL
+              </label>
+              <input
+                type="url"
+                value={formData.coverImageUrl}
+                onChange={(e) => setFormData(prev => ({ ...prev, coverImageUrl: e.target.value }))}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="https://example.com/image.jpg"
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                支持ImgBB链接，系统会自动转换格式
+              </p>
+            </div>
+
+            <div className="flex justify-end space-x-3 pt-4">
+              <button
+                type="button"
+                onClick={onCancel}
+                className="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+              >
+                {series ? 'Update' : 'Create'}
+              </button>
+            </div>
+          </form>
         </div>
-        
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Series Name *
-            </label>
-            <input
-              type="text"
-              required
-              value={formData.name}
-              onChange={(e) => handleNameChange(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter series name"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              URL Slug *
-            </label>
-            <input
-              type="text"
-              required
-              value={formData.slug}
-              onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="url-friendly-slug"
-            />
-            <p className="text-sm text-gray-500 mt-1">
-              Used in URLs: /series/{formData.slug}
-            </p>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Release Date
-            </label>
-            <input
-              type="date"
-              value={formData.releaseDate}
-              onChange={(e) => setFormData({ ...formData, releaseDate: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Description
-            </label>
-            <textarea
-              rows={4}
-              value={formData.description}
-              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter series description"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Cover Image URL
-            </label>
-            <input
-              type="url"
-              value={formData.coverImageUrl}
-              onChange={(e) => setFormData({ ...formData, coverImageUrl: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="https://example.com/image.jpg"
-            />
-          </div>
-
-          <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200">
-            <button
-              type="button"
-              onClick={onCancel}
-              className="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-            >
-              {series ? 'Update Series' : 'Create Series'}
-            </button>
-          </div>
-        </form>
       </div>
     </div>
   )

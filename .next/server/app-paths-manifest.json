@@ -1,7 +1,9 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
   "/page": "app/page.js",
   "/news/page": "app/news/page.js",
-  "/admin/series/page": "app/admin/series/page.js",
   "/series/[slug]/page": "app/series/[slug]/page.js",
-  "/admin/figures/page": "app/admin/figures/page.js"
+  "/admin/series/page": "app/admin/series/page.js",
+  "/admin/figures/page": "app/admin/figures/page.js",
+  "/api/admin/series/route": "app/api/admin/series/route.js"
 }

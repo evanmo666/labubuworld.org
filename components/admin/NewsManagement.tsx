@@ -4,7 +4,16 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getAllNewsPosts, type NewsPost } from '@/lib/db'
+
+// 定义NewsPost类型
+interface NewsPost {
+  id: number
+  title: string
+  slug: string
+  content: string
+  publishedAt: string
+  imageUrl: string
+}
 
 export function NewsManagement() {
   const router = useRouter()
@@ -25,8 +34,13 @@ export function NewsManagement() {
 
   const loadNews = async () => {
     try {
-      const data = await getAllNewsPosts()
-      setNews(data)
+      const response = await fetch('/api/admin/news')
+      if (response.ok) {
+        const data = await response.json()
+        setNews(data)
+      } else {
+        console.error('加载新闻失败:', response.statusText)
+      }
     } catch (error) {
       console.error('加载新闻失败:', error)
     } finally {
@@ -41,10 +55,21 @@ export function NewsManagement() {
 
   const handleDelete = async (id: number) => {
     if (confirm('确定要删除这篇新闻吗？')) {
-      // 这里应该调用删除API
-      console.log('删除新闻:', id)
-      // 临时从列表中移除
-      setNews(news.filter(n => n.id !== id))
+      try {
+        const response = await fetch(`/api/admin/news/${id}`, {
+          method: 'DELETE'
+        })
+        
+        if (response.ok) {
+          setNews(news.filter(n => n.id !== id))
+        } else {
+          console.error('删除新闻失败:', response.statusText)
+          alert('删除新闻失败，请重试')
+        }
+      } catch (error) {
+        console.error('删除新闻失败:', error)
+        alert('删除新闻失败，请重试')
+      }
     }
   }
 
@@ -52,28 +77,49 @@ export function NewsManagement() {
     try {
       if (editingNews) {
         // 更新现有新闻
-        const updatedNews = news.map(n => 
-          n.id === editingNews.id 
-            ? { ...n, ...formData }
-            : n
-        )
-        setNews(updatedNews)
+        const response = await fetch(`/api/admin/news/${editingNews.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        })
+        
+        if (response.ok) {
+          const updatedNews = await response.json()
+          setNews(news.map(n => 
+            n.id === editingNews.id ? updatedNews : n
+          ))
+        } else {
+          console.error('更新新闻失败:', response.statusText)
+          alert('更新新闻失败，请重试')
+          return
+        }
       } else {
         // 添加新新闻
-        const newNews: NewsPost = {
-          id: Math.max(...news.map(n => n.id), 0) + 1,
-          title: formData.title || '',
-          slug: formData.slug || '',
-          content: formData.content || '',
-          imageUrl: formData.imageUrl || null,
-          publishedAt: formData.publishedAt || new Date().toISOString()
+        const response = await fetch('/api/admin/news', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        })
+        
+        if (response.ok) {
+          const newNews = await response.json()
+          setNews([newNews, ...news])
+        } else {
+          console.error('创建新闻失败:', response.statusText)
+          alert('创建新闻失败，请重试')
+          return
         }
-        setNews([...news, newNews])
       }
+      
       setShowAddForm(false)
       setEditingNews(null)
     } catch (error) {
       console.error('保存新闻失败:', error)
+      alert('保存新闻失败，请重试')
     }
   }
 
@@ -134,9 +180,6 @@ export function NewsManagement() {
                     Article
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Author
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Published
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -165,15 +208,12 @@ export function NewsManagement() {
                           <div className="text-sm font-medium text-gray-900 max-w-xs truncate">
                             {newsItem.title}
                           </div>
-                                                     <div className="text-sm text-gray-500 max-w-xs truncate">
-                             {newsItem.content.substring(0, 100)}...
-                           </div>
-                         </div>
-                       </div>
-                     </td>
-                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                       Admin
-                     </td>
+                          <div className="text-sm text-gray-500 max-w-xs truncate">
+                            {newsItem.content.replace(/<[^>]*>/g, '').substring(0, 100)}...
+                          </div>
+                        </div>
+                      </div>
+                    </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       {new Date(newsItem.publishedAt).toLocaleDateString()}
                     </td>
@@ -207,6 +247,22 @@ export function NewsManagement() {
             </table>
           </div>
         </div>
+
+        {/* 空状态 */}
+        {news.length === 0 && (
+          <div className="text-center py-12">
+            <div className="text-gray-500 text-lg">No articles found</div>
+            <button
+              onClick={() => {
+                setEditingNews(null)
+                setShowAddForm(true)
+              }}
+              className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+            >
+              Add First Article
+            </button>
+          </div>
+        )}
       </main>
 
       {/* 添加/编辑表单模态框 */}
@@ -239,7 +295,7 @@ function NewsForm({
     slug: news?.slug || '',
     content: news?.content || '',
     imageUrl: news?.imageUrl || '',
-    publishedAt: news?.publishedAt ? new Date(news.publishedAt).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]
+    publishedAt: news?.publishedAt ? news.publishedAt.split('T')[0] : new Date().toISOString().split('T')[0]
   })
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -258,131 +314,113 @@ function NewsForm({
   }
 
   const handleTitleChange = (title: string) => {
-    setFormData({
-      ...formData,
+    setFormData(prev => ({
+      ...prev,
       title,
-      slug: formData.slug || generateSlug(title)
-    })
+      slug: prev.slug || generateSlug(title)
+    }))
   }
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h3 className="text-lg font-medium text-gray-900">
+      <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="p-6">
+          <h3 className="text-lg font-medium text-gray-900 mb-4">
             {news ? 'Edit Article' : 'Add New Article'}
           </h3>
-        </div>
-        
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
-          <div className="grid grid-cols-2 gap-6">
+          
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Article Title *
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Title *
               </label>
               <input
                 type="text"
-                required
                 value={formData.title}
                 onChange={(e) => handleTitleChange(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter article title"
+                required
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                URL Slug *
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Slug *
               </label>
               <input
                 type="text"
-                required
                 value={formData.slug}
-                onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
+                onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="url-friendly-slug"
+                required
               />
-              <p className="text-sm text-gray-500 mt-1">
-                Used in URLs: /news/{formData.slug}
+              <p className="text-xs text-gray-500 mt-1">
+                URL-friendly identifier (e.g., "labubu-news-update")
               </p>
             </div>
-          </div>
 
-
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Content *
-            </label>
-            <textarea
-              rows={12}
-              required
-              value={formData.content}
-              onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Write your article content here..."
-            />
-            <p className="text-sm text-gray-500 mt-1">
-              You can use basic HTML tags for formatting
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Content *
+              </label>
+              <textarea
+                value={formData.content}
+                onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
+                rows={8}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="支持HTML标签，如 <p>、<strong>、<em> 等"
+                required
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                支持基本HTML标签进行格式化
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 Featured Image URL
               </label>
               <input
                 type="url"
                 value={formData.imageUrl}
-                onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
+                onChange={(e) => setFormData(prev => ({ ...prev, imageUrl: e.target.value }))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="https://example.com/image.jpg"
               />
+              <p className="text-xs text-gray-500 mt-1">
+                支持ImgBB链接，系统会自动转换格式
+              </p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Author
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Publish Date
               </label>
               <input
-                type="text"
-                value="Admin"
-                disabled
-                className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-500"
-                placeholder="Author name"
+                type="date"
+                value={formData.publishedAt}
+                onChange={(e) => setFormData(prev => ({ ...prev, publishedAt: e.target.value }))}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-          </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Publish Date
-            </label>
-            <input
-              type="date"
-              value={formData.publishedAt}
-              onChange={(e) => setFormData({ ...formData, publishedAt: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200">
-            <button
-              type="button"
-              onClick={onCancel}
-              className="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-            >
-              {news ? 'Update Article' : 'Publish Article'}
-            </button>
-          </div>
-        </form>
+            <div className="flex justify-end space-x-3 pt-4">
+              <button
+                type="button"
+                onClick={onCancel}
+                className="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+              >
+                {news ? 'Update' : 'Publish'}
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   )
