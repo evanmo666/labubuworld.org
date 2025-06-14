@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Nunito, Poppins } from 'next/font/google'
+import Image from 'next/image'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -22,6 +23,11 @@ export const metadata: Metadata = {
   authors: [{ name: 'Labubu World' }],
   creator: 'Labubu World',
   publisher: 'Labubu World',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
   openGraph: {
     title: 'Labubu World | Your Ultimate Collection Guide',
     description: 'Discover the magical world of Labubu collectible figures',
@@ -29,11 +35,20 @@ export const metadata: Metadata = {
     siteName: 'Labubu World',
     locale: 'en_US',
     type: 'website',
+    images: [
+      {
+        url: '/labubu-logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'Labubu World Logo',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Labubu World | Your Ultimate Collection Guide',
     description: 'Discover the magical world of Labubu collectible figures',
+    images: ['/labubu-logo.png'],
   },
   robots: {
     index: true,
@@ -61,7 +76,14 @@ export default function RootLayout({
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-16">
               <div className="flex items-center">
-                <a href="/" className="flex-shrink-0 flex items-center">
+                <a href="/" className="flex-shrink-0 flex items-center space-x-3">
+                  <Image
+                    src="/labubu-logo.png"
+                    alt="Labubu Logo"
+                    width={40}
+                    height={40}
+                    className="rounded-lg"
+                  />
                   <span className="text-2xl font-bold text-primary-600">Labubu World</span>
                 </a>
               </div>
@@ -107,7 +129,16 @@ export default function RootLayout({
           <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div>
-                <h3 className="text-lg font-semibold mb-4">Labubu World</h3>
+                <div className="flex items-center space-x-3 mb-4">
+                  <Image
+                    src="/labubu-logo.png"
+                    alt="Labubu Logo"
+                    width={32}
+                    height={32}
+                    className="rounded-lg"
+                  />
+                  <h3 className="text-lg font-semibold">Labubu World</h3>
+                </div>
                 <p className="text-gray-400 text-sm">
                   Your ultimate guide to the magical world of Labubu collectible figures.
                   Discover series, authenticity tips, and latest news.
