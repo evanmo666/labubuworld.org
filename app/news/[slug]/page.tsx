@@ -2,11 +2,11 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getNewsPostBySlug, getLatestNewsPosts } from '@/lib/db'
+import { getNewsBySlug, getLatestNewsPosts } from '@/lib/db'
 
 // 生成动态元数据
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const article = await getNewsPostBySlug(params.slug)
+  const article = await getNewsBySlug(params.slug)
   
   if (!article) {
     return {
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 export default async function NewsDetailPage({ params }: { params: { slug: string } }) {
   // 获取文章信息
-  const article = await getNewsPostBySlug(params.slug)
+  const article = await getNewsBySlug(params.slug)
   
   if (!article) {
     notFound()

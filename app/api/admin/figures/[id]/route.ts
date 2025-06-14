@@ -1,7 +1,43 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { updateFigureInMemory, deleteFigureFromMemory, convertImgBBUrl } from '@/lib/memory-store'
+import { 
+  getAllFiguresFromFile,
+  updateFigureInFile, 
+  deleteFigureFromFile 
+} from '@/lib/file-store'
 
-// 更新玩偶
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const id = parseInt(params.id)
+    if (isNaN(id)) {
+      return NextResponse.json(
+        { error: '无效的玩偶ID' },
+        { status: 400 }
+      )
+    }
+
+    const figures = await getAllFiguresFromFile()
+    const targetFigure = figures.find(f => f.id === id)
+    
+    if (!targetFigure) {
+      return NextResponse.json(
+        { error: '玩偶不存在' },
+        { status: 404 }
+      )
+    }
+
+    return NextResponse.json(targetFigure)
+  } catch (error) {
+    console.error('获取玩偶失败:', error)
+    return NextResponse.json(
+      { error: '获取玩偶失败' },
+      { status: 500 }
+    )
+  }
+}
+
 export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } }
@@ -16,32 +52,16 @@ export async function PUT(
     }
 
     const body = await request.json()
-    let { name, description, imageUrl, isSecret, seriesId } = body
+    const { name, description, imageUrl, isSecret, seriesId } = body
 
-    // 验证必填字段
-    if (!name || !seriesId) {
-      return NextResponse.json(
-        { error: '玩偶名称和系列ID是必填字段' },
-        { status: 400 }
-      )
-    }
-
-    // 转换ImgBB链接格式
-    if (imageUrl) {
-      imageUrl = convertImgBBUrl(imageUrl)
-    }
-
-    // 更新玩偶数据
-    const updateData = {
+    const updatedFigure = await updateFigureInFile(id, {
       name,
-      description: description || null,
-      imageUrl: imageUrl || null,
+      description,
+      imageUrl,
       isSecret: Boolean(isSecret),
-      seriesId: parseInt(seriesId)
-    }
+      seriesId: seriesId ? parseInt(seriesId) : undefined
+    })
 
-    const updatedFigure = updateFigureInMemory(id, updateData)
-    
     if (!updatedFigure) {
       return NextResponse.json(
         { error: '玩偶不存在' },
@@ -59,7 +79,6 @@ export async function PUT(
   }
 }
 
-// 删除玩偶
 export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
@@ -73,7 +92,7 @@ export async function DELETE(
       )
     }
 
-    const success = deleteFigureFromMemory(id)
+    const success = await deleteFigureFromFile(id)
     
     if (!success) {
       return NextResponse.json(

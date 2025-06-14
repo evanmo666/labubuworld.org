@@ -6,3 +6,6 @@ node_modules
 .next
 dist
 build
+
+# 数据文件夹 - 包含用户生成的内容
+/data

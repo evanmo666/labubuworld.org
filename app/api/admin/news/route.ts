@@ -1,18 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getAllNewsPosts } from '@/lib/db'
-import { getAllNewsFromMemory, createNewsInMemory, convertImgBBUrl } from '@/lib/memory-store'
+import { 
+  getAllNewsFromFile, 
+  createNewsInFile 
+} from '@/lib/file-store'
 
 // 获取所有新闻文章
 export async function GET() {
   try {
-    // 优先使用数据库，如果不可用则使用内存存储
-    let news
-    try {
-      news = await getAllNewsPosts()
-    } catch (error) {
-      console.log('数据库不可用，使用内存存储')
-      news = getAllNewsFromMemory()
-    }
+    const news = await getAllNewsFromFile()
     return NextResponse.json(news)
   } catch (error) {
     console.error('获取新闻列表失败:', error)
@@ -27,32 +22,23 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    let { title, slug, content, imageUrl } = body
+    const { title, slug, content, imageUrl, publishedAt } = body
 
     // 验证必填字段
     if (!title || !slug || !content) {
       return NextResponse.json(
-        { error: '标题、slug和内容是必填字段' },
+        { error: '标题、slug和内容为必填字段' },
         { status: 400 }
       )
     }
 
-    // 转换ImgBB链接格式
-    if (imageUrl) {
-      imageUrl = convertImgBBUrl(imageUrl)
-    }
-
-    // 创建新新闻数据
-    const newsData = {
+    const newNews = await createNewsInFile({
       title,
       slug,
       content,
-      publishedAt: new Date().toISOString(),
-      imageUrl: imageUrl || null
-    }
-
-    // 使用内存存储创建新闻
-    const newNews = createNewsInMemory(newsData)
+      imageUrl: imageUrl || '',
+      publishedAt: publishedAt || new Date().toISOString()
+    })
 
     return NextResponse.json(newNews, { status: 201 })
   } catch (error) {

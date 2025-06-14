@@ -1,7 +1,43 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { updateNewsInMemory, deleteNewsFromMemory, convertImgBBUrl } from '@/lib/memory-store'
+import { 
+  getAllNewsFromFile,
+  updateNewsInFile, 
+  deleteNewsFromFile 
+} from '@/lib/file-store'
 
-// 更新新闻
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const id = parseInt(params.id)
+    if (isNaN(id)) {
+      return NextResponse.json(
+        { error: '无效的新闻ID' },
+        { status: 400 }
+      )
+    }
+
+    const news = await getAllNewsFromFile()
+    const targetNews = news.find(n => n.id === id)
+    
+    if (!targetNews) {
+      return NextResponse.json(
+        { error: '新闻不存在' },
+        { status: 404 }
+      )
+    }
+
+    return NextResponse.json(targetNews)
+  } catch (error) {
+    console.error('获取新闻失败:', error)
+    return NextResponse.json(
+      { error: '获取新闻失败' },
+      { status: 500 }
+    )
+  }
+}
+
 export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } }
@@ -16,31 +52,16 @@ export async function PUT(
     }
 
     const body = await request.json()
-    let { title, slug, content, imageUrl } = body
+    const { title, slug, content, imageUrl, publishedAt } = body
 
-    // 验证必填字段
-    if (!title || !slug || !content) {
-      return NextResponse.json(
-        { error: '标题、slug和内容是必填字段' },
-        { status: 400 }
-      )
-    }
-
-    // 转换ImgBB链接格式
-    if (imageUrl) {
-      imageUrl = convertImgBBUrl(imageUrl)
-    }
-
-    // 更新新闻数据
-    const updateData = {
+    const updatedNews = await updateNewsInFile(id, {
       title,
       slug,
       content,
-      imageUrl: imageUrl || null
-    }
+      imageUrl,
+      publishedAt
+    })
 
-    const updatedNews = updateNewsInMemory(id, updateData)
-    
     if (!updatedNews) {
       return NextResponse.json(
         { error: '新闻不存在' },
@@ -58,7 +79,6 @@ export async function PUT(
   }
 }
 
-// 删除新闻
 export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
@@ -72,7 +92,7 @@ export async function DELETE(
       )
     }
 
-    const success = deleteNewsFromMemory(id)
+    const success = await deleteNewsFromFile(id)
     
     if (!success) {
       return NextResponse.json(
