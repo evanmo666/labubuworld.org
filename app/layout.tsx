@@ -2,8 +2,6 @@ import type { Metadata } from 'next'
 import { Nunito, Poppins, Comfortaa, Quicksand } from 'next/font/google'
 import Image from 'next/image'
 import './globals.css'
-import { Navbar } from '@/components/Navbar'
-import { Footer } from '@/components/Footer'
 import Script from 'next/script'
 
 const nunito = Nunito({ 
