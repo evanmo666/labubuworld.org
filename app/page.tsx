@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getLatestSeries, getLatestNewsPosts } from '@/lib/db'
+import { HeaderAd, ContentAd } from '@/components/AdSense'
 
 // 主页的元数据
 export const metadata: Metadata = {
@@ -67,6 +68,13 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* 顶部广告位 */}
+      <section className="py-4 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <HeaderAd />
+        </div>
+      </section>
+
       {/* 精选系列区域 */}
       <section className="py-16 gradient-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -124,6 +132,13 @@ export default async function HomePage() {
               </svg>
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* 内容中间广告位 */}
+      <section className="py-4 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ContentAd />
         </div>
       </section>
 

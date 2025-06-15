@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getAllNewsPosts } from '@/lib/db'
+import { HeaderAd, ContentAd } from '@/components/AdSense'
 
 // 新闻页面的元数据
 export const metadata: Metadata = {

@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import { Nunito, Poppins, Comfortaa, Quicksand } from 'next/font/google'
 import Image from 'next/image'
 import './globals.css'
+import { Navbar } from '@/components/Navbar'
+import { Footer } from '@/components/Footer'
+import Script from 'next/script'
 
 const nunito = Nunito({ 
   subsets: ['latin'],
@@ -98,6 +101,13 @@ export default function RootLayout({
               gtag('config', 'G-2LVBR7CXCW');
             `,
           }}
+        />
+        {/* Google AdSense 脚本 */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6940272936543623"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
         />
       </head>
       <body className={`${comfortaa.className} font-round`}>

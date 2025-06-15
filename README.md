@@ -9,6 +9,8 @@ Labubu World 是一个专门为 Labubu 收藏玩具打造的资讯网站，提�
 - **样式**: Tailwind CSS
 - **数据存储**: 文件存储系统 (JSON) + 数据库降级支持
 - **身份验证**: NextAuth.js v5
+- **广告系统**: Google AdSense
+- **分析工具**: Google Analytics
 - **部署**: Vercel
 - **端口**: 固定使用 3000 端口
 
@@ -30,6 +32,7 @@ labubuworld/
 ├── lib/                         # 工具库
 │   ├── db.ts                   # 数据库连接和查询函数
 │   ├── file-store.ts           # 文件存储系统（JSON持久化）
+│   ├── adsense-config.ts       # Google AdSense 配置文件
 │   └── memory-store.ts         # 内存存储系统（已弃用）
 ├── data/                        # 数据文件夹（JSON文件存储）
 │   ├── series.json             # 系列数据
@@ -38,8 +41,10 @@ labubuworld/
 ├── scripts/                     # 脚本文件
 │   └── init-db.sql             # 数据库初始化SQL
 ├── public/                      # 静态资源
+│   ├── ads.txt                 # Google AdSense 验证文件
 │   └── images/                 # 图片资源
 └── components/                  # 可复用组件
+    └── AdSense.tsx             # Google AdSense 广告组件
 ```
 
 ## 🗄️ 数据存储系统
@@ -147,7 +152,29 @@ labubuworld/
    - ✅ 模态框表单编辑器
    - ✅ 数据验证和错误处理
 
-### ✅ 最新完成 (v0.7.0) - 后台管理系统用户体验优化
+### ✅ 最新完成 (v0.8.0) - Google AdSense 广告系统集成
+1. **Google AdSense 完整集成**
+   - ✅ 添加 Google AdSense 脚本到网站头部
+   - ✅ 创建 ads.txt 验证文件（pub-6940272936543623）
+   - ✅ 开发完整的 AdSense 组件系统
+   - ✅ 配置多种广告位类型（横幅、矩形、流体、文章内）
+   - ✅ 支持响应式广告显示
+
+2. **广告位管理系统**
+   - ✅ 创建 AdSense 配置文件（adsense-config.ts）
+   - ✅ 预定义广告位组件（HeaderAd、SidebarAd、ContentAd等）
+   - ✅ 广告位ID统一管理和配置
+   - ✅ 开发/生产环境广告显示控制
+   - ✅ 广告加载错误处理和降级
+
+3. **广告位布局优化**
+   - ✅ 主页添加顶部和内容中间广告位
+   - ✅ 系列页面和新闻页面广告位集成
+   - ✅ 移动端友好的广告显示
+   - ✅ 广告与内容的和谐布局设计
+   - ✅ 用户体验优化（不影响阅读体验）
+
+### ✅ 已完成 (v0.7.0) - 后台管理系统用户体验优化
 1. **编辑功能全面改进**
    - ✅ 玩偶管理添加"View Series"链接，可直接跳转到对应系列页面
    - ✅ 所有管理页面的图片URL输入框添加实时预览功能
@@ -321,7 +348,60 @@ POSTGRES_DATABASE=
 # NextAuth.js
 NEXTAUTH_SECRET=
 NEXTAUTH_URL=
+
+# Google AdSense
+NEXT_PUBLIC_ADSENSE_CLIENT_ID="ca-pub-6940272936543623"
+NEXT_PUBLIC_SHOW_ADS="true"
+
+# Google Analytics
+NEXT_PUBLIC_GA_ID="G-2LVBR7CXCW"
 ```
+
+## 💰 Google AdSense 配置指南
+
+### AdSense 账户设置
+1. **AdSense 客户端ID**: `ca-pub-6940272936543623`
+2. **ads.txt 文件**: 已自动创建在 `/public/ads.txt`
+3. **验证内容**: `google.com, pub-6940272936543623, DIRECT, f08c47fec0942fa0`
+
+### 广告位配置
+项目已预配置以下广告位类型，需要在 Google AdSense 后台创建对应的广告单元：
+
+```typescript
+// 广告位ID配置（需要替换为实际ID）
+AD_SLOTS: {
+  HEADER_BANNER: '1234567890',      // 页面顶部横幅广告
+  SIDEBAR_RECTANGLE: '0987654321',  // 侧边栏广告（300x250）
+  CONTENT_MIDDLE: '1122334455',     // 内容中间广告（自适应）
+  FOOTER_BANNER: '5544332211',      // 页脚广告
+  IN_ARTICLE: '6677889900',         // 文章内广告
+  MOBILE_BANNER: '9988776655',      // 移动端广告
+}
+```
+
+### 使用步骤
+1. **在 Google AdSense 后台创建广告单元**
+2. **获取广告位ID并更新配置文件** (`lib/adsense-config.ts`)
+3. **在页面中使用预定义的广告组件**:
+   ```tsx
+   import { HeaderAd, ContentAd, SidebarAd } from '@/components/AdSense'
+   
+   // 在页面中使用
+   <HeaderAd />      // 顶部横幅广告
+   <ContentAd />     // 内容中间广告
+   <SidebarAd />     // 侧边栏广告
+   ```
+
+### 环境控制
+- **开发环境**: 通过 `NEXT_PUBLIC_SHOW_ADS=true` 控制是否显示广告
+- **生产环境**: 默认显示所有广告
+- **广告加载策略**: 使用 `afterInteractive` 策略优化性能
+
+### 广告位布局
+- **主页**: 顶部横幅 + 内容中间广告
+- **系列页面**: 侧边栏 + 内容广告
+- **新闻页面**: 顶部横幅 + 内容广告
+- **文章详情**: 文章内广告 + 侧边栏广告
 
 ## 📞 支持
 
@@ -331,9 +411,9 @@ NEXTAUTH_URL=
 
 ---
 
-**版本**: v0.7.0  
+**版本**: v0.8.0  
 **最后更新**: 2024年12月19日  
-**开发状态**: 前台页面完成，后台管理系统完成，包含完整的CRUD功能、数据可视化和优化的用户体验
+**开发状态**: 前台页面完成，后台管理系统完成，Google AdSense广告系统集成完成
 
 ## 🔑 管理员登录信息
 
