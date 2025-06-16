@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# 禁止爬取管理后台
+Disallow: /admin/
+Disallow: /api/
+
+# 禁止爬取临时文件
+Disallow: /_next/
+Disallow: /data/
+
+# 网站地图位置
+Sitemap: https://labubuworld.org/sitemap.xml
+
+# 爬取延迟（可选）
+Crawl-delay: 1 

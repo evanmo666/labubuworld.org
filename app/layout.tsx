@@ -33,7 +33,7 @@ const quicksand = Quicksand({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://labubuworld.vercel.app'),
+  metadataBase: new URL('https://labubuworld.org'),
   title: 'Labubu World | Your Ultimate Collection Guide',
   description: 'Discover the magical world of Labubu collectible figures, series guides, authenticity tips, and latest news.',
   keywords: 'Labubu, collectible figures, Pop Mart, Kasing Lung, toy collection',
